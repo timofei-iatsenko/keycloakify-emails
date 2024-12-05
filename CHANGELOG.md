@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.0.3...1.1.0) (2024-12-05)
+
+### Features
+
+- add generic to types ([0e4336f](https://github.com/timofei-iatsenko/keycloakify-emails/commit/0e4336f66bd8ba7761e535f36ef0965ef065179f))
+
 ## [1.0.3](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.0.2...1.0.3) (2024-12-05)
 
 ### Bug Fixes
