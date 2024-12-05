@@ -47,6 +47,7 @@
     "properties-parser": "^0.6.0"
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^9.0.3",
     "@types/html-to-text": "^9.0.4",
     "@types/properties-parser": "^0.3.3",
     "@types/react": "^18.3.13",
