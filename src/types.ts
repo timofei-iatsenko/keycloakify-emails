@@ -1,19 +1,17 @@
-/**
- * this file should be part of keycloakify integration (be in the package)
- */
-
-export type GetTemplateProps = {
+export type GetTemplateProps<T extends string = string> = {
   locale: string;
-  themeName: string;
+  themeName: T;
   plainText: boolean;
 };
 
-export type GetTemplate = (props: GetTemplateProps) => Promise<string>;
-export type GetSubject = (props: {
+export type GetTemplate<T extends string = string> = (
+  props: GetTemplateProps<T>,
+) => Promise<string>;
+export type GetSubject<T extends string = string> = (props: {
   locale: string;
-  themeName: string;
+  themeName: T;
 }) => Promise<string>;
-export type GetMessages = (props: {
+export type GetMessages<T extends string = string> = (props: {
   locale: string;
-  themeName: string;
+  themeName: T;
 }) => Record<string, string>;
