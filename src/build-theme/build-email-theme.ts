@@ -1,24 +1,22 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
-import { GetMessages, GetSubject, GetTemplate } from "../types.js";
-import * as propertiesParser from "properties-parser";
-import type { BuildOptions } from "esbuild";
+import { GetSubject, GetTemplate } from "../types.js";
+import type {
+  I18nModule,
+  TemplateModule,
+  BuildEmailThemeOptions,
+} from "./types.js";
+import {
+  getBaseName,
+  writePropertiesFile,
+  getEmailTemplateFolder,
+} from "./utils.js";
+import { renderMessages } from "./render-messages.js";
+import { renderTemplate } from "./render-template.js";
 
 const esbuildOutDir = "./.temp-emails";
 
-type TemplateModule = {
-  getTemplate: GetTemplate;
-  getSubject: GetSubject;
-  file: string;
-};
-
-type I18nModule = { getMessages: GetMessages };
-
-/**
- *
- * @param {string} dirPath
- */
 async function getTemplates(dirPath: string) {
   try {
     // Read all items in the directory
@@ -57,28 +55,9 @@ async function bundle(
   });
 }
 
-export type BuildEmailThemeOptions = {
-  /**
-   * "./emails/templates"
-   */
-  templatesSrcDirPath: string;
-  keycloakifyBuildDirPath: string;
-
-  /**
-   * @default [en]
-   */
-  locales: string[];
-
-  /**
-   * "./emails/i18n.ts"
-   */
-  i18nSourceFile: string;
-  themeNames: string[];
-
-  cwd: string;
-  esbuild?: BuildOptions;
-};
-
+/**
+ * Build Keycloak email theme.
+ */
 export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   const esbuildOutDirPath = path.join(opts.cwd, esbuildOutDir);
   console.log(`Build emails for ${opts.themeNames.join(", ")} themes`);
@@ -103,11 +82,15 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
     }>);
 
     if (!module.getTemplate) {
-      throw new Error(`File ${file} does not have an exported function getTemplate`);
+      throw new Error(
+        `File ${file} does not have an exported function getTemplate`,
+      );
     }
 
     if (!module.getSubject) {
-      throw new Error(`File ${file} does not have an exported function getSubject`);
+      throw new Error(
+        `File ${file} does not have an exported function getSubject`,
+      );
     }
 
     console.log(`- ${file}`);
@@ -134,7 +117,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   for (const themeName of opts.themeNames) {
     // i'm intentionally doing this sequentially to avoid
     // concurrency during templates rendering
-    await renderTheme(themeName, modules, i18nFileModule, opts);
+    await renderThemeVariant(themeName, modules, i18nFileModule, opts);
   }
 
   await fs.rm(esbuildOutDirPath, {
@@ -145,11 +128,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   console.log("Done! 🚀");
 }
 
-function toCamelCase(str: string) {
-  return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
-}
-
-async function renderTheme(
+async function renderThemeVariant(
   themeName: string,
   templates: TemplateModule[],
   i18nModule: I18nModule,
@@ -162,86 +141,11 @@ async function renderTheme(
   }
 
   for (const locale of opts.locales) {
-    const messages: Record<string, string> = i18nModule.getMessages({
-      locale,
-      themeName,
-    });
-
-    for (const mod of templates) {
-      messages[toCamelCase(getBaseName(mod.file)) + "Subject"] = await mod.getSubject({
-        locale,
-        themeName,
-      });
-    }
-
-    await writePropertiesFile(
-      path.join(emailThemeFolder, "messages"),
-      `messages_${locale}.properties`,
-      messages,
-    );
+    await renderMessages(i18nModule, templates, themeName, locale, opts);
   }
 
   await writePropertiesFile(emailThemeFolder, "theme.properties", {
     parent: "base",
     locales: opts.locales.join(","),
   });
-}
-
-async function renderTemplate(
-  mod: TemplateModule,
-  themeName: string,
-  opts: BuildEmailThemeOptions,
-) {
-  const emailThemeFolder = getEmailTemplateFolder(opts, themeName);
-
-  const ftlName = getBaseName(mod.file) + ".ftl";
-  const entryPointContent = `<#include "./" + locale + "/${ftlName}">`;
-
-  // write ftl html entrypoint
-  await writeFile(path.join(emailThemeFolder, "html"), ftlName, entryPointContent);
-
-  // write ftl text entrypoint
-  await writeFile(path.join(emailThemeFolder, "text"), ftlName, entryPointContent);
-
-  for (const locale of opts.locales) {
-    for (const type of ["html", "text"] as const) {
-      const html = await mod.getTemplate({
-        themeName,
-        locale,
-        plainText: type === "text",
-      });
-
-      // write ftl file
-      await writeFile(path.join(emailThemeFolder, type, locale), ftlName, html);
-    }
-  }
-}
-
-function getEmailTemplateFolder(opts: BuildEmailThemeOptions, themeName: string) {
-  return path.join(opts.keycloakifyBuildDirPath, themeName, "email");
-}
-
-async function writeFile(filePath: string, filename: string, content: string) {
-  await fs.mkdir(filePath, { recursive: true });
-  await fs.writeFile(path.join(filePath, filename), content);
-}
-
-async function writePropertiesFile(
-  path: string,
-  filename: string,
-  properties: Record<string, string>,
-) {
-  const editor = propertiesParser.createEditor();
-  for (const [key, value] of Object.entries(properties)) {
-    editor.set(key, value);
-  }
-
-  await writeFile(path, filename, editor.toString());
-}
-/**
- * get a basename (filename) from a pth without an extension
- * @param filePath
- */
-function getBaseName(filePath: string) {
-  return path.basename(filePath, path.extname(filePath));
 }
