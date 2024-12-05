@@ -11,7 +11,7 @@ env:
 
 jobs:
   validate:
-    name: Release
+    name: Lint Test and Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -28,8 +28,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
+      - name: Prettier
+        run: pnpm format:check
+
       - name: Test
-        run: pnpm format:check && pnpm test
+        run: pnpm test
 
       - name: Build
         run: pnpm build
