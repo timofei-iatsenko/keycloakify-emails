@@ -80,7 +80,7 @@ export const getSubject: GetSubject = async (props) => {
 
 Use the `GetTemplate` and `GetSubject` types for parameter details and return types.
 
-TODO: Check full example with `jsx-email`.
+Check full example in the `./example` folder in this repo.
 
 ### Creating an i18n.ts file
 
