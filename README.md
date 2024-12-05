@@ -1,6 +1,4 @@
-[![License][badge-license]][license]  
-[![Version][badge-version]][package]  
-[![Downloads][badge-downloads]][package]  
+[![License][badge-license]][license] [![Version][badge-version]][package] [![Downloads][badge-downloads]][package]  
 
 # keycloakify-emails
 
