@@ -167,6 +167,7 @@ const paragraph = {
   textAlign: "left" as const,
 };
 
+// used by Preview App of jsx-email
 export const previewProps: TemplateProps = {
   locale: "en",
   themeName: "vanilla",
@@ -179,23 +180,23 @@ const { exp } = createVariablesHelper("email-verification.ftl");
 export const Template = ({ locale }: TemplateProps) => (
   <Html lang={locale}>
     <Head />
-    <Preview>{preview}</Preview>
+    <Preview>Verification link from {exp("realmName")}</Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={box}>
           <Text style={paragraph}>
-          <p>
-            Someone has created a {exp("user.firstName")} account with this email address. If
+            Someone has created a {exp("realmName")} account with this email address. If
             this was you, click the link below to verify your email address
-          </p>
-          <p>
+          </Text>
+          <Text style={paragraph}>
             <a href={exp("link")}>Link to e-mail address verification</a>
-          </p>
-          <p>
+          </Text>
+          <Text style={paragraph}>
             This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
-          </p>
-          <p>If you didn't create this account, just ignore this message.</p>
-        </Text>
+          </Text>
+          <Text style={paragraph}>
+            >If you didn't create this account, just ignore this message.
+          </Text>
         </Section>
       </Container>
     </Body>
@@ -206,10 +207,12 @@ export const getTemplate: GetTemplate = async (props) => {
   return await render(<Template locale={props.locale} themeName={props.themeName} />, props.plainText);
 };
 
-export const getSubject: GetSubject = async (_props) => {
+export const getSubject: GetSubject = async (props) => {
   return "Verify email";
 };
-``` 
+```
+
+Consult with a [jsx-email](https://jsx.email/docs/quick-start) documentation for more info. 
 
 ## License
 
