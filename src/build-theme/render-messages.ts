@@ -1,5 +1,14 @@
-import type {I18nModule, TemplateModule, BuildEmailThemeOptions} from "./types.js";
-import {toCamelCase, getBaseName, writePropertiesFile, getEmailTemplateFolder} from "./utils.js";
+import type {
+  I18nModule,
+  TemplateModule,
+  BuildEmailThemeOptions,
+} from "./types.js";
+import {
+  toCamelCase,
+  getBaseName,
+  writePropertiesFile,
+  getEmailTemplateFolder,
+} from "./utils.js";
 import path from "node:path";
 
 /**

@@ -1,4 +1,4 @@
-[![License][badge-license]][license] [![Version][badge-version]][package] [![Downloads][badge-downloads]][package]  
+[![License][badge-license]][license] [![Version][badge-version]][package] [![Downloads][badge-downloads]][package]
 
 # keycloakify-emails
 
@@ -9,6 +9,7 @@
 This extension allows you to build email themes using modern JavaScript tooling.
 
 ### Features:
+
 - Support theme variants. You can produce different templates using the same sourcecode.
 - Support i18n. You can use i18n solution of your choice. The extension simply pass a `locale` to your template function.
 - Support override for `messages.properties` using javascript and i18n solution of your choice.
@@ -40,7 +41,7 @@ export default defineConfig({
   plugins: [
     react(),
     keycloakify({
-      themeName: ['vanilla', 'chocolate'],
+      themeName: ["vanilla", "chocolate"],
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
         await buildEmailTheme({
@@ -92,11 +93,12 @@ import { GetMessages } from "keycloakify-emails";
 
 export const getMessages: GetMessages = (props) => {
   // all properties are optional, if you omit them, they will be taken from a base theme
-  if (props.locale === 'en') {
+  if (props.locale === "en") {
     return {
       "requiredAction.CONFIGURE_TOTP": "Configure OTP",
       "requiredAction.TERMS_AND_CONDITIONS": "Terms and Conditions",
-      "linkExpirationFormatter.timePeriodUnit.minutes": "{0,choice,0#minutes|1#minute|1<minutes}",
+      "linkExpirationFormatter.timePeriodUnit.minutes":
+        "{0,choice,0#minutes|1#minute|1<minutes}",
     };
   } else {
     return {};
@@ -115,7 +117,12 @@ npm i --save-dev jsx-email
 Then create templates using `jsx-email` components:
 
 ```tsx
-import { GetSubject, GetTemplate, GetTemplateProps, createVariablesHelper } from "keycloakify-emails";
+import {
+  GetSubject,
+  GetTemplate,
+  GetTemplateProps,
+  createVariablesHelper,
+} from "keycloakify-emails";
 import { render } from "keycloakify-emails/jsx-email";
 import { Text } from "jsx-email";
 
@@ -162,14 +169,16 @@ export const Template = ({ locale }: TemplateProps) => (
       <Container style={container}>
         <Section style={box}>
           <Text style={paragraph}>
-            Someone has created a {exp("realmName")} account with this email address. If
-            this was you, click the link below to verify your email address
+            Someone has created a {exp("realmName")} account with this email
+            address. If this was you, click the link below to verify your email
+            address
           </Text>
           <Text style={paragraph}>
             <a href={exp("link")}>Link to e-mail address verification</a>
           </Text>
           <Text style={paragraph}>
-            This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
+            This link will expire within{" "}
+            {exp("linkExpirationFormatter(linkExpiration)")}.
           </Text>
           <Text style={paragraph}>
             If you didn't create this account, just ignore this message.
@@ -181,7 +190,10 @@ export const Template = ({ locale }: TemplateProps) => (
 );
 
 export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template locale={props.locale} themeName={props.themeName} />, props.plainText);
+  return await render(
+    <Template locale={props.locale} themeName={props.themeName} />,
+    props.plainText,
+  );
 };
 
 export const getSubject: GetSubject = async (props) => {

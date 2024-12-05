@@ -34,6 +34,7 @@
   "scripts": {
     "build": "unbuild",
     "format:check": "prettier . --check --ignore-unknown",
+    "format:fix": "prettier . --write --ignore-unknown",
     "prepare": "husky",
     "release": "pnpm build && pnpm publish",
     "test": "vitest --run"

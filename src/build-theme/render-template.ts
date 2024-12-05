@@ -1,5 +1,5 @@
-import type {TemplateModule, BuildEmailThemeOptions} from "./types.js";
-import {getEmailTemplateFolder, getBaseName, writeFile} from "./utils.js";
+import type { TemplateModule, BuildEmailThemeOptions } from "./types.js";
+import { getEmailTemplateFolder, getBaseName, writeFile } from "./utils.js";
 import path from "node:path";
 
 /**
