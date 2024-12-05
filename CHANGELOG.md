@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.0.2...1.0.3) (2024-12-05)
+
+### Bug Fixes
+
+- react components uses incorrect jsx runtime ([0087d1b](https://github.com/timofei-iatsenko/keycloakify-emails/commit/0087d1bef5ddd1fb02639a4044d526132b95ac22))
+
 ## [1.0.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.0.1...1.0.2) (2024-12-05)
 
 ### Bug Fixes
