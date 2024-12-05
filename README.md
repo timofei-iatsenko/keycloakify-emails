@@ -172,7 +172,7 @@ export const Template = ({ locale }: TemplateProps) => (
             This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
           </Text>
           <Text style={paragraph}>
-            >If you didn't create this account, just ignore this message.
+            If you didn't create this account, just ignore this message.
           </Text>
         </Section>
       </Container>
