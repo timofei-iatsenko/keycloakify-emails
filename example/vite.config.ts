@@ -11,10 +11,6 @@ export default defineConfig({
       themeName: ["vanilla", "chocolate"],
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
-        // Assume that config of esbuild would be overridable via keycloackify settings
-        // similarly to how it's configurable in jsx-email
-        // when this code would be incorporated into keycloackify jsx-email config
-        // shouldn't be there, because we want a framework-agnostic solution
         const { config: loadConfig } = await import("./jsx-email.config.js");
 
         const config = await loadConfig;

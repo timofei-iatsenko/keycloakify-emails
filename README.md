@@ -17,6 +17,16 @@ This extension allows you to build email themes using modern JavaScript tooling.
 
 Framework-agnostic, the extension works with any JS email library. [jsx-email](https://jsx.email/) is recommended, with dedicated bindings and helpers provided.
 
+### How it works
+
+This library generates Freemarker templates using JavaScript, leaving expression placeholders in place.
+The JavaScript code is executed ahead of time during static generation, not by Keycloak.
+Therefore, JavaScript functions do not have access to Keycloak variables like `userName` or `realmName` during rendering.
+
+Keycloak replaces the Freemarker expressions with their actual values during email rendering
+
+The library includes a set of React components and utilities designed to simplify the process of writing these expressions.
+
 ## Installation
 
 ```bash
@@ -59,7 +69,9 @@ export default defineConfig({
 });
 ```
 
-## Create empty `./src/emails` folder.
+### Enable email theme in Keycloakify
+
+Create empty `./src/emails` folder with command:
 
 ```bash
 mkdir -p ./src/emails && touch ./src/emails/.gitkeep
@@ -92,7 +104,7 @@ Check full example in the `./example` folder in this repo.
 
 ### Creating an i18n.ts file
 
-There is some messages which are used by KeyCloak methods and could be overridden only using `messages.properties` files.
+There are some messages which are used by Keycloak methods and could be overridden only using `messages.properties` files.
 
 Create a `/emails/i18n.ts` file with following content:
 
@@ -114,7 +126,7 @@ export const getMessages: GetMessages = (props) => {
 };
 ```
 
-### Integrating with jsx-email
+## Integrating with jsx-email
 
 Install `jsx-email`:
 
@@ -210,6 +222,85 @@ export const getSubject: GetSubject = async (props) => {
 ```
 
 See [jsx-email docs](https://jsx.email/docs/quick-start) for more.
+
+## Freemarker helpers
+
+### `createVariablesHelper("email-verification.ftl")`
+
+This function provides a type-safe way to write expressions for templates.
+
+```tsx
+import { createVariablesHelper } from "keycloakify-emails";
+const { exp } = createVariablesHelper("email-verification.ftl");
+
+<Text style={paragraph}>
+  Someone has created a {exp("realmName")} account with this email address. If
+  this was you, click the link below to verify your email address.
+</Text>;
+```
+
+The `exp("realmName")` argument is type-checked, ensuring that only valid template variables are available and accessible for the specified template.
+
+### Condition
+
+Facilitates writing `if/elseif/else` expressions for Freemarker templates.
+
+```tsx
+import * as Fm from "keycloakify-emails/jsx-email";
+
+<Fm.If condition="firstName?? && lastName??">
+  <Fm.Then>
+    Hello {exp("firstName")} {exp("lastName")}
+  </Fm.Then>
+  <Fm.ElseIf condition="firstName??">Hello {exp("firstName")}</Fm.ElseIf>
+  <Fm.Else>Hello Guest!</Fm.Else>
+</Fm.If>;
+```
+
+For simpler cases, you can use `If` without the `Then` case:
+
+```tsx
+<Fm.If condition="firstName?? && lastName??">
+  Hello {exp("firstName")} {exp("lastName")}
+</Fm.If>
+```
+
+### RawOutput
+
+Allows printing content into a template without processing or escaping, useful for Freemarker expressions that are not valid HTML.
+
+```tsx
+export const If = ({
+  condition,
+  children,
+}: PropsWithChildren<{ condition: string }>) => (
+  <>
+    <RawOutput content={`<#if ${condition}>`} />
+    {children}
+    <RawOutput content="</#if>" />
+  </>
+);
+```
+
+## Keycloak email templates reference
+
+| Template name                                | Description                     |
+| -------------------------------------------- | ------------------------------- |
+| email-test.ftl                               | Test email template             |
+| email-update-confirmation.ftl                | Email update confirmation       |
+| email-verification.ftl                       | Email verification              |
+| event-login_error.ftl                        | Login error event notification  |
+| event-remove_credential.ftl                  | Credential removal notification |
+| event-remove_totp.ftl                        | TOTP removal notification       |
+| event-update_credential.ftl                  | Credential update notification  |
+| event-update_password.ftl                    | Password update notification    |
+| event-update_totp.ftl                        | TOTP update notification        |
+| event-user_disabled_by_permanent_lockout.ftl | Permanent lockout notification  |
+| event-user_disabled_by_temporary_lockout.ftl | Temporary lockout notification  |
+| executeActions.ftl                           | Execute actions email           |
+| identity-provider-link.ftl                   | Identity provider link email    |
+| org-invite.ftl                               | Organization invitation         |
+| password-reset.ftl                           | Password reset email            |
 
 ## License
 
