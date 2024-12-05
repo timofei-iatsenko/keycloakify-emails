@@ -1,0 +1,1 @@
+<#include "./" + locale + "/email-test.ftl">

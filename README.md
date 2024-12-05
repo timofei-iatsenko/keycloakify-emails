@@ -140,9 +140,7 @@ Then you can use in your templates:
 ```tsx
 import { GetSubject, GetTemplate, GetTemplateProps, createVariablesHelper } from "keycloakify-emails";
 import { render } from "keycloakify-emails/jsx-email";
-
 import { Text } from "jsx-email";
-import { EmailLayout } from "@/layout";
 
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 

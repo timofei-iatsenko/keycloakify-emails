@@ -1,0 +1,1 @@
+email-test.ftl > template {"themeName":"vanilla","locale":"pl","plainText":false}

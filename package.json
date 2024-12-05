@@ -33,8 +33,10 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "format:check": "prettier . --check --ignore-unknown",
     "prepare": "husky",
-    "release": "pnpm build && pnpm publish"
+    "release": "pnpm build && pnpm publish",
+    "test": "vitest --run"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
@@ -52,7 +54,8 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "prettier-plugin-packagejson": "^2.5.6",
-    "unbuild": "2.0.0"
+    "unbuild": "2.0.0",
+    "vitest": "^2.1.8"
   },
   "peerDependencies": {
     "jsx-email": "^2.4.2",

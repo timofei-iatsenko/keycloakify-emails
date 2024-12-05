@@ -99,11 +99,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   });
 
   const i18nFileModule = await (import(
-    path.join(
-      import.meta.dirname,
-      esbuildOutDir,
-      getBaseName(opts.i18nSourceFile) + ".js",
-    )
+    path.join(esbuildOutDirPath, getBaseName(opts.i18nSourceFile) + ".js")
   ) as Promise<I18nModule>);
 
   if (!i18nFileModule.getMessages) {
