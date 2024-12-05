@@ -1,3 +1,5 @@
+## [1.1.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.1...1.1.2) (2024-12-05)
+
 ## [1.1.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.0...1.1.1) (2024-12-05)
 
 ### Bug Fixes
