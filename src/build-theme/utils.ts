@@ -13,7 +13,12 @@ export function getEmailTemplateFolder(
   opts: BuildEmailThemeOptions,
   themeName: string,
 ) {
-  return path.join(opts.keycloakifyBuildDirPath, themeName, "email");
+  return path.join(
+    opts.keycloakifyBuildDirPath,
+    "/resources/theme",
+    themeName,
+    "email",
+  );
 }
 
 export async function writeFile(

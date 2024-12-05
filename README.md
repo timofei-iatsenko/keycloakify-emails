@@ -59,6 +59,14 @@ export default defineConfig({
 });
 ```
 
+## Create empty `./src/emails` folder.
+
+```bash
+mkdir -p ./src/emails && touch ./src/emails/.gitkeep
+```
+
+This will turn on default email theme support in the Keycloakify.
+
 ### Creating a Template
 
 Place template files in `templatesSrcDirPath`. Templates not defined will fall back to the default Keycloak theme.
