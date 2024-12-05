@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.0...1.1.1) (2024-12-05)
+
+### Bug Fixes
+
+- destination path for keycloakify ([f0d529d](https://github.com/timofei-iatsenko/keycloakify-emails/commit/f0d529dc20f2ba18ec0dfabf40923d86e0fef417))
+
 # [1.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.0.3...1.1.0) (2024-12-05)
 
 ### Features
