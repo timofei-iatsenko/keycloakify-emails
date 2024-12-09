@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { RawOutput } from "./raw-output.js";
+import { Raw } from "jsx-email";
 
 /**
  * JSX helper to write a freemarker conditions
@@ -33,9 +33,9 @@ export const If = ({
   children,
 }: PropsWithChildren<{ condition: string }>) => (
   <>
-    <RawOutput content={`<#if ${condition}>`} />
+    <Raw content={`<#if ${condition}>`} />
     {children}
-    <RawOutput content="</#if>" />
+    <Raw content="</#if>" />
   </>
 );
 export const Then = ({ children }: PropsWithChildren) => {
@@ -44,7 +44,7 @@ export const Then = ({ children }: PropsWithChildren) => {
 
 export const Else = ({ children }: PropsWithChildren) => (
   <>
-    <RawOutput content="<#else>"></RawOutput>
+    <Raw content="<#else>" />
     {children}
   </>
 );
@@ -54,7 +54,7 @@ export const ElseIf = ({
   children,
 }: PropsWithChildren<{ condition: string }>) => (
   <>
-    <RawOutput content={`<#elseif ${condition}>`}></RawOutput>
+    <Raw content={`<#elseif ${condition}>`} />
     {children}
   </>
 );
