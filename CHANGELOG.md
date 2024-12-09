@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.2...2.0.0) (2024-12-09)
+
+### Features
+
+- remove RawOutput and render exports in favor of Raw component from "jsx-email" ([ed0a6df](https://github.com/timofei-iatsenko/keycloakify-emails/commit/ed0a6df0990ce8bc85863fa9cf4079a27472a37c))
+
+### BREAKING CHANGES
+
+- `RawOutput` component and `render` function is no longer exported. Use `Raw` component and `render` function from "jsx-email" directly.
+
 ## [1.1.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.1...1.1.2) (2024-12-05)
 
 ## [1.1.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.0...1.1.1) (2024-12-05)
