@@ -1,6 +1,5 @@
-import { Text } from "jsx-email";
+import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
-import { render } from "keycloakify-emails/jsx-email";
 import {
   createVariablesHelper,
   GetSubject,
@@ -47,7 +46,7 @@ export const Template = ({ locale }: TemplateProps) => (
   </EmailLayout>
 );
 export const getTemplate: GetTemplate = async (props) => {
-  return await render(<Template {...props} />, props.plainText);
+  return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
 export const getSubject: GetSubject = async (_props) => {
