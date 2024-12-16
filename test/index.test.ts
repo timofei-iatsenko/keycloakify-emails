@@ -1,6 +1,6 @@
 import nodepath from "path";
 import fs from "fs/promises";
-import { test } from "vitest";
+import { test, describe } from "vitest";
 import { compareFolders } from "./utils.js";
 import { buildEmailTheme } from "../src/index.js";
 
@@ -18,17 +18,34 @@ async function prepare(caseFolderName: string) {
   return { rootDir, actualPath, expectedPath };
 }
 
-test("Smoke test", async () => {
-  const { rootDir, actualPath, expectedPath } = await prepare("smoke");
+describe("Smoke Test", () => {
+  test("Should work with absolute path", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare("smoke");
 
-  await buildEmailTheme({
-    cwd: rootDir,
-    i18nSourceFile: rootDir + "/fixtures/emails/i18n.ts",
-    templatesSrcDirPath: rootDir + "/fixtures/emails/templates",
-    locales: ["en", "pl"],
-    themeNames: ["vanilla", "chocolate"],
-    keycloakifyBuildDirPath: actualPath,
+    await buildEmailTheme({
+      cwd: rootDir,
+      i18nSourceFile: rootDir + "/fixtures/emails/i18n.ts",
+      templatesSrcDirPath: rootDir + "/fixtures/emails/templates",
+      locales: ["en", "pl"],
+      themeNames: ["vanilla", "chocolate"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
   });
 
-  compareFolders(actualPath, expectedPath);
+  test("Should work with relative path", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare("smoke");
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      i18nSourceFile: "./fixtures/emails/i18n.ts",
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      locales: ["en", "pl"],
+      themeNames: ["vanilla", "chocolate"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
 });

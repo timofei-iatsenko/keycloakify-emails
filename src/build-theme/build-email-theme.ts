@@ -7,11 +7,7 @@ import type {
   TemplateModule,
   BuildEmailThemeOptions,
 } from "./types.js";
-import {
-  getBaseName,
-  writePropertiesFile,
-  getEmailTemplateFolder,
-} from "./utils.js";
+import { writePropertiesFile, getEmailTemplateFolder } from "./utils.js";
 import { renderMessages } from "./render-messages.js";
 import { renderTemplate } from "./render-template.js";
 
@@ -41,7 +37,7 @@ async function bundle(
   // It's better to not use the same bundling configuration used for the
   // frontend theme, because for email templates there might be a different
   // transpiling settings, such as other jsx-pragma or additional transpilation plugins,
-  await esbuild.build({
+  const result = await esbuild.build({
     entryPoints: entryPoints,
     bundle: true,
     outdir,
@@ -50,9 +46,22 @@ async function bundle(
     packages: "external",
     format: "esm",
     target: "node20",
-
     ...opts.esbuild,
+    metafile: true,
   });
+
+  // collect map of entrypoints -> output files
+  // esbuild return paths relative to the CWD
+  // https://github.com/evanw/esbuild/issues/338
+  return Object.entries(result.metafile.outputs).reduce(
+    (acc, [filePath, meta]) => {
+      if (meta.entryPoint) {
+        acc[path.resolve(meta.entryPoint)] = path.resolve(filePath);
+      }
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
 }
 
 /**
@@ -62,21 +71,21 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   const esbuildOutDirPath = path.join(opts.cwd, esbuildOutDir);
   console.log(`Build emails for ${opts.themeNames.join(", ")} themes`);
 
-  const tpls = await getTemplates(opts.templatesSrcDirPath);
+  const tpls = await getTemplates(
+    path.resolve(opts.cwd, opts.templatesSrcDirPath),
+  );
 
   // todo: validate that i18nSourceFile file exists and throw error
   // or make it optional?
-  await bundle([...tpls, opts.i18nSourceFile], esbuildOutDirPath, opts);
+  const bundled = await bundle(
+    [...tpls, path.resolve(opts.cwd, opts.i18nSourceFile)],
+    esbuildOutDirPath,
+    opts,
+  );
 
   console.log(`Discovered templates:`);
   const promises = tpls.map(async (file) => {
-    const module = await (import(
-      path.join(
-        esbuildOutDirPath,
-        // todo: esbuild change the dist structure based on a common ancestor
-        "templates/" + getBaseName(file) + ".js",
-      )
-    ) as Promise<{
+    const module = await (import(bundled[file]) as Promise<{
       getTemplate: GetTemplate;
       getSubject: GetSubject;
     }>);
@@ -99,7 +108,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   });
 
   const i18nFileModule = await (import(
-    path.join(esbuildOutDirPath, getBaseName(opts.i18nSourceFile) + ".js")
+    bundled[path.resolve(opts.cwd, opts.i18nSourceFile)]
   ) as Promise<I18nModule>);
 
   if (!i18nFileModule.getMessages) {
