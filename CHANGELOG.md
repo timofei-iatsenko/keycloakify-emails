@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.0...2.0.1) (2024-12-16)
+
+### Bug Fixes
+
+- improve path handling ([5c3879f](https://github.com/timofei-iatsenko/keycloakify-emails/commit/5c3879ff343fbeee5e2842dea8e5961d0b7448fe))
+
 # [2.0.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/1.1.2...2.0.0) (2024-12-09)
 
 ### Features
