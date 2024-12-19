@@ -34,9 +34,6 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Build
-        run: pnpm build
-
   test:
     runs-on: ${{ matrix.os }}
     strategy:
