@@ -58,7 +58,7 @@ async function bundle(
   return Object.entries(result.metafile.outputs).reduce(
     (acc, [filePath, meta]) => {
       if (meta.entryPoint) {
-        acc[path.resolve(cwd, meta.entryPoint)] = path.resolve(cwd, filePath);
+        acc[path.resolve(cwd, meta.entryPoint)] = filePath;
       }
       return acc;
     },
