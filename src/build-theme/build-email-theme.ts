@@ -10,6 +10,7 @@ import type {
 import { writePropertiesFile, getEmailTemplateFolder } from "./utils.js";
 import { renderMessages } from "./render-messages.js";
 import { renderTemplate } from "./render-template.js";
+import { pathToFileURL } from "node:url";
 
 const esbuildOutDir = "./.temp-emails";
 
@@ -58,7 +59,11 @@ async function bundle(
   return Object.entries(result.metafile.outputs).reduce(
     (acc, [filePath, meta]) => {
       if (meta.entryPoint) {
-        acc[path.resolve(cwd, meta.entryPoint)] = filePath;
+        // Absolute pathes doesn't work on windows.
+        // Have to use `pathToFileURL` to convert it to url
+        acc[path.resolve(cwd, meta.entryPoint)] = pathToFileURL(
+          path.resolve(cwd, filePath),
+        ).toString();
       }
       return acc;
     },
