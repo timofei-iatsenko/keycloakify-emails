@@ -1,0 +1,12 @@
+diff --git a/dist/esm/config.js b/dist/esm/config.js
+index c97b11d38b1bec3c6e7d7910b65c07e7afeaa1cc..af80259dd4fe909e987a9b36eabe8bd3739b2250 100644
+--- a/dist/esm/config.js
++++ b/dist/esm/config.js
+@@ -150,6 +150,7 @@ const moduleImport = async (id) => {
+         return mod;
+     }
+     catch (e) {
++        console.log(e)
+         try {
+             return require(id);
+         }
