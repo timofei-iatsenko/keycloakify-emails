@@ -11,7 +11,7 @@ env:
 
 jobs:
   validate:
-    name: Lint Test and Build
+    name: Lint Test and Build Lib
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -33,9 +33,6 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: Build
-        run: pnpm build
 
   test:
     runs-on: ${{ matrix.os }}
@@ -60,3 +57,32 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  test-example:
+    #    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    name: Smoke test example
+    #    strategy:
+    #      matrix:
+    #        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: cd ./example && pnpm build-keycloak-theme

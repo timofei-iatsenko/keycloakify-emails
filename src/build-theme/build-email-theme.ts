@@ -10,6 +10,7 @@ import type {
 import { writePropertiesFile, getEmailTemplateFolder } from "./utils.js";
 import { renderMessages } from "./render-messages.js";
 import { renderTemplate } from "./render-template.js";
+import { pathToFileURL } from "node:url";
 
 const esbuildOutDir = "./.temp-emails";
 
@@ -30,6 +31,7 @@ async function getTemplates(dirPath: string) {
 
 async function bundle(
   entryPoints: string[],
+  cwd: string,
   outdir: string,
   opts: BuildEmailThemeOptions,
 ) {
@@ -41,6 +43,7 @@ async function bundle(
     entryPoints: entryPoints,
     bundle: true,
     outdir,
+    absWorkingDir: cwd,
     platform: "node",
     sourcemap: true,
     packages: "external",
@@ -56,7 +59,11 @@ async function bundle(
   return Object.entries(result.metafile.outputs).reduce(
     (acc, [filePath, meta]) => {
       if (meta.entryPoint) {
-        acc[path.resolve(meta.entryPoint)] = path.resolve(filePath);
+        // Absolute pathes doesn't work on windows.
+        // Have to use `pathToFileURL` to convert it to url
+        acc[path.resolve(cwd, meta.entryPoint)] = pathToFileURL(
+          path.resolve(cwd, filePath),
+        ).toString();
       }
       return acc;
     },
@@ -79,6 +86,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   // or make it optional?
   const bundled = await bundle(
     [...tpls, path.resolve(opts.cwd, opts.i18nSourceFile)],
+    opts.cwd,
     esbuildOutDirPath,
     opts,
   );
