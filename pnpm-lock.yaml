@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   jsx-email:
-    hash: lw572etmmjvpxarowkqqptjobm
+    hash: paey55xgp3i3j3y7tsml2t3pyq
     path: patches/jsx-email.patch
 
 importers:
@@ -18,7 +18,7 @@ importers:
         version: 0.24.0
       jsx-email:
         specifier: ^2.5.3
-        version: 2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+        version: 2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
       properties-parser:
         specifier: ^0.6.0
         version: 0.6.0
@@ -125,7 +125,7 @@ importers:
         version: 15.14.0
       jsx-email:
         specifier: ^2.5.3
-        version: 2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+        version: 2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
       keycloakify-emails:
         specifier: workspace:*
         version: link:..
@@ -5578,13 +5578,13 @@ snapshots:
       '@adobe/css-tools': 4.4.1
       hast-util-select: 6.0.3
       hast-util-to-string: 3.0.1
-      jsx-email: 2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+      jsx-email: 2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
       unist-util-remove: 4.0.0
       unist-util-visit: 5.0.0
 
   '@jsx-email/plugin-minify@1.0.1(jsx-email@2.5.3)':
     dependencies:
-      jsx-email: 2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+      jsx-email: 2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
       rehype-minify-attribute-whitespace: 4.0.1
       rehype-minify-css-style: 4.0.1
       rehype-minify-enumerated-attribute: 5.0.1
@@ -5606,7 +5606,7 @@ snapshots:
 
   '@jsx-email/plugin-pretty@1.0.0(jsx-email@2.5.3)':
     dependencies:
-      jsx-email: 2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+      jsx-email: 2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
       pretty: 2.0.0
 
   '@nodelib/fs.scandir@2.1.5':
@@ -8409,7 +8409,7 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
-  jsx-email@2.5.3(patch_hash=lw572etmmjvpxarowkqqptjobm)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3):
+  jsx-email@2.5.3(patch_hash=paey55xgp3i3j3y7tsml2t3pyq)(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3):
     dependencies:
       '@dot/log': 0.1.5
       '@jsx-email/doiuse-email': 1.0.4
