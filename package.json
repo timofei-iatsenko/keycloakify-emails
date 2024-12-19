@@ -43,11 +43,13 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "common-ancestor-path": "^1.0.1",
     "esbuild": "^0.24.0",
     "properties-parser": "^0.6.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^9.0.3",
+    "@types/common-ancestor-path": "^1.0.2",
     "@types/html-to-text": "^9.0.4",
     "@types/properties-parser": "^0.3.3",
     "@types/react": "^18.3.13",

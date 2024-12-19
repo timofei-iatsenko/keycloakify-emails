@@ -30,6 +30,7 @@ async function getTemplates(dirPath: string) {
 
 async function bundle(
   entryPoints: string[],
+  cwd: string,
   outdir: string,
   opts: BuildEmailThemeOptions,
 ) {
@@ -41,6 +42,7 @@ async function bundle(
     entryPoints: entryPoints,
     bundle: true,
     outdir,
+    absWorkingDir: cwd,
     platform: "node",
     sourcemap: true,
     packages: "external",
@@ -56,7 +58,7 @@ async function bundle(
   return Object.entries(result.metafile.outputs).reduce(
     (acc, [filePath, meta]) => {
       if (meta.entryPoint) {
-        acc[path.resolve(meta.entryPoint)] = path.resolve(filePath);
+        acc[path.resolve(cwd, meta.entryPoint)] = path.resolve(cwd, filePath);
       }
       return acc;
     },
@@ -79,6 +81,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
   // or make it optional?
   const bundled = await bundle(
     [...tpls, path.resolve(opts.cwd, opts.i18nSourceFile)],
+    opts.cwd,
     esbuildOutDirPath,
     opts,
   );
