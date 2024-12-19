@@ -93,7 +93,6 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
 
   console.log(`Discovered templates:`);
   const promises = tpls.map(async (file) => {
-    console.log("Debug: bundled[file]", bundled[file]);
     const module = await (import(bundled[file]) as Promise<{
       getTemplate: GetTemplate;
       getSubject: GetSubject;
