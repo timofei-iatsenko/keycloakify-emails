@@ -83,5 +83,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
+      - name: Build
+        run: pnpm build
+
       - name: Test
         run: cd ./example && pnpm build-keycloak-theme
