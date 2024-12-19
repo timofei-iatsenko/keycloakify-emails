@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      common-ancestor-path:
-        specifier: ^1.0.1
-        version: 1.0.1
       esbuild:
         specifier: ^0.24.0
         version: 0.24.0
@@ -27,9 +24,6 @@ importers:
       '@release-it/conventional-changelog':
         specifier: ^9.0.3
         version: 9.0.3(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.0.0)(release-it@17.10.0(typescript@5.6.3))
-      '@types/common-ancestor-path':
-        specifier: ^1.0.2
-        version: 1.0.2
       '@types/html-to-text':
         specifier: ^9.0.4
         version: 9.0.4
@@ -1585,9 +1579,6 @@ packages:
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
 
-  '@types/common-ancestor-path@1.0.2':
-    resolution: {integrity: sha512-8llyULydTb7nM9yfiW78n6id3cet+qnATPV3R44yIywxgBaa8QXFSM9QTMf4OH64QOB45BlgZ3/oL4mmFLztQw==}
-
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
@@ -2092,9 +2083,6 @@ packages:
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
-
-  common-ancestor-path@1.0.1:
-    resolution: {integrity: sha512-L3sHRo1pXXEqX8VU28kfgUY+YGsk09hPqZiZmLacNib6XNTCM8ubYeT7ryXQw8asB1sKgcU5lkB7ONug08aB8w==}
 
   commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
@@ -6359,8 +6347,6 @@ snapshots:
     dependencies:
       '@babel/types': 7.26.0
 
-  '@types/common-ancestor-path@1.0.2': {}
-
   '@types/cookie@0.6.0': {}
 
   '@types/doctrine@0.0.9': {}
@@ -6930,8 +6916,6 @@ snapshots:
   commander@4.1.1: {}
 
   commander@7.2.0: {}
-
-  common-ancestor-path@1.0.1: {}
 
   commondir@1.0.1: {}
 
