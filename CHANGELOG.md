@@ -1,3 +1,9 @@
+## [2.0.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.1...2.0.2) (2024-12-19)
+
+### Bug Fixes
+
+- incorrect cwd when run from the keycloakify ([#8](https://github.com/timofei-iatsenko/keycloakify-emails/issues/8)) ([544dcbf](https://github.com/timofei-iatsenko/keycloakify-emails/commit/544dcbf94bea05207a629fd0f77bc4ea2956ee7c))
+
 ## [2.0.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.0...2.0.1) (2024-12-16)
 
 ### Bug Fixes
