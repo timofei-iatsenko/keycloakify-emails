@@ -6,7 +6,7 @@ index c97b11d38b1bec3c6e7d7910b65c07e7afeaa1cc..af80259dd4fe909e987a9b36eabe8bd3
          return mod;
      }
      catch (e) {
-+        console.log(e)
++        throw e
          try {
              return require(id);
          }
