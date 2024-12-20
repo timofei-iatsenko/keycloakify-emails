@@ -1,3 +1,9 @@
+# [2.2.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.1.0...2.2.0) (2024-12-20)
+
+### Features
+
+- add assets handling ([#11](https://github.com/timofei-iatsenko/keycloakify-emails/issues/11)) ([1144efe](https://github.com/timofei-iatsenko/keycloakify-emails/commit/1144efe64c7b6cba632d431e8c5dd2ae818afd20))
+
 # [2.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.2...2.1.0) (2024-12-20)
 
 ### Features
