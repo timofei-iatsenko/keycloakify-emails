@@ -1,4 +1,4 @@
-import { render, Text } from "jsx-email";
+import { render, Text, Img, Container } from "jsx-email";
 import { EmailLayout } from "../layout";
 import {
   createVariablesHelper,
@@ -25,8 +25,13 @@ export const templateName = "Email Test";
 
 const { exp } = createVariablesHelper("email-test.ftl");
 
+const baseUrl = import.meta.isJsxEmailPreview ? "/assets" : "${url.resourcesUrl}";
+
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={"Here is a preview"} locale={locale}>
+    <Container>
+      <Img src={`${baseUrl}/kc-logo.png`} alt="KC Logo" width="83" height="75" />
+    </Container>
     <Text style={paragraph}>This is a test message from {exp("realmName")}</Text>
   </EmailLayout>
 );
