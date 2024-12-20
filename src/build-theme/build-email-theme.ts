@@ -11,9 +11,9 @@ import { writePropertiesFile, getEmailTemplateFolder } from "./utils.js";
 import { renderMessages } from "./render-messages.js";
 import { renderTemplate } from "./render-template.js";
 import { pathToFileURL } from "node:url";
-import { I18n } from "../../example/src/login/i18n.js";
 
 const esbuildOutDir = "./.temp-emails";
+const kcEmailResourcesDir = "/resources";
 
 async function getTemplates(dirPath: string) {
   try {
@@ -165,4 +165,15 @@ async function renderThemeVariant(
     parent: "base",
     locales: opts.locales.join(","),
   });
+
+  if (opts.assetsDirPath) {
+    await fs.cp(
+      path.resolve(opts.cwd, opts.assetsDirPath),
+      path.join(emailThemeFolder, kcEmailResourcesDir),
+      {
+        force: true,
+        recursive: true,
+      },
+    );
+  }
 }

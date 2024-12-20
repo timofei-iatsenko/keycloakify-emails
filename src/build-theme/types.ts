@@ -22,7 +22,15 @@ export type BuildEmailThemeOptions = {
    * ```
    */
   templatesSrcDirPath: string;
-
+  /**
+   * Path were your assets are stored.
+   *
+   * Path might be absolute or relative, in case of relative
+   * it would be joined with path {@link BuildEmailThemeOptions.cwd}
+   *
+   * @optional
+   */
+  assetsDirPath?: string;
   /**
    * Path the value of `buildContext.keycloakifyBuildDirPath`
    */

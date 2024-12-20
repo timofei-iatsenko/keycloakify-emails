@@ -26,6 +26,7 @@ describe("Smoke Test", () => {
       cwd: rootDir,
       i18nSourceFile: rootDir + "/fixtures/emails/i18n.ts",
       templatesSrcDirPath: rootDir + "/fixtures/emails/templates",
+      assetsDirPath: rootDir + "/fixtures/emails/assets",
       locales: ["en", "pl"],
       themeNames: ["vanilla", "chocolate"],
       keycloakifyBuildDirPath: actualPath,
@@ -41,6 +42,7 @@ describe("Smoke Test", () => {
       cwd: rootDir,
       i18nSourceFile: "./fixtures/emails/i18n.ts",
       templatesSrcDirPath: "./fixtures/emails/templates",
+      assetsDirPath: "./fixtures/emails/assets",
       locales: ["en", "pl"],
       themeNames: ["vanilla", "chocolate"],
       keycloakifyBuildDirPath: actualPath,
@@ -49,7 +51,7 @@ describe("Smoke Test", () => {
     compareFolders(actualPath, expectedPath);
   });
 
-  test("Should work without i18n.ts", async () => {
+  test("Should work without i18n.ts and assets", async () => {
     const { rootDir, actualPath, expectedPath } = await prepare("no-i18n-ts");
 
     await buildEmailTheme({

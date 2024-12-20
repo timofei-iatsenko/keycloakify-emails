@@ -275,6 +275,33 @@ export const getSubject: GetSubject = async (props) => {
 };
 ```
 
+## Adding an Image to an Email Theme
+
+The ideal approach for managing assets in an email theme is to store them externally, such as in an S3 bucket or a CDN. This setup ensures assets are globally accessible and independent of the Keycloak instance. However, if external storage is not an option, assets can be stored within Keycloak itself.
+
+It’s important to remember that email assets must remain unchanged once the email is sent. These assets should never be deleted or altered, except to replace them with files of identical dimensions. Emails can reside in a recipient’s mailbox indefinitely, and links to assets within these emails need to remain functional. Deleting or modifying these assets could render the email broken, as it is impossible to retroactively update the links or resend the email with corrected references.
+
+To store assets in the Keycloak instance, configure the directory where these files will reside. The recommended directory is `/emails/templates/assets`, as this location is compatible with the JSX-Email preview server. Here's an example configuration:
+
+```js
+await buildEmailTheme({
+  // Other configurations
+  assetsDirPath: import.meta.dirname + "/emails/templates/assets",
+});
+```
+
+Once the directory is set up, add your assets to this location. For instance, if you place an image at `emails/templates/assets/kc-logo.png`, you can reference it in your email template using the following snippet:
+
+```tsx
+const baseUrl = import.meta.isJsxEmailPreview
+  ? "/assets"
+  : "${url.resourcesUrl}";
+
+<Img src={`${baseUrl}/kc-logo.png`} width="83" height="75" />;
+```
+
+This approach ensures compatibility with both Keycloak and the JSX-Email preview server.
+
 ## Freemarker helpers
 
 ### `createVariablesHelper("email-verification.ftl")`
@@ -315,23 +342,6 @@ For simpler cases, you can use `If` without the `Then` case:
 <Fm.If condition="firstName?? && lastName??">
   Hello {exp("firstName")} {exp("lastName")}
 </Fm.If>
-```
-
-### RawOutput
-
-Allows printing content into a template without processing or escaping, useful for Freemarker expressions that are not valid HTML.
-
-```tsx
-export const If = ({
-  condition,
-  children,
-}: PropsWithChildren<{ condition: string }>) => (
-  <>
-    <RawOutput content={`<#if ${condition}>`} />
-    {children}
-    <RawOutput content="</#if>" />
-  </>
-);
 ```
 
 ## Keycloak email templates reference
