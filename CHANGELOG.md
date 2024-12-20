@@ -1,3 +1,9 @@
+# [2.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.2...2.1.0) (2024-12-20)
+
+### Features
+
+- optional i18n.ts and improve docs ([#10](https://github.com/timofei-iatsenko/keycloakify-emails/issues/10)) ([384af15](https://github.com/timofei-iatsenko/keycloakify-emails/commit/384af15e198fef3d4f7a3b08b652484ced0a182e))
+
 ## [2.0.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.0.1...2.0.2) (2024-12-19)
 
 ### Bug Fixes
