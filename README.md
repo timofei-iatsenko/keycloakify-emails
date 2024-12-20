@@ -14,6 +14,7 @@ This extension allows you to build email themes using modern JavaScript tooling.
 - Support i18n. You can use i18n solution of your choice. The extension simply pass a `locale` to your template function.
 - Support override for `messages.properties` using javascript and i18n solution of your choice.
 - Provide type-safe helpers for available template variables, as well helpers to create Freemarker expressions.
+- Produce both plain text and html version of email
 
 Framework-agnostic, the extension works with any JS email library. [jsx-email](https://jsx.email/) is recommended, with dedicated bindings and helpers provided.
 
@@ -56,7 +57,6 @@ export default defineConfig({
       postBuild: async (buildContext) => {
         await buildEmailTheme({
           templatesSrcDirPath: import.meta.dirname + "/emails/templates",
-          i18nSourceFile: import.meta.dirname + "/emails/i18n.ts",
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ["en", "pl"],
@@ -81,9 +81,9 @@ This will turn on default email theme support in the Keycloakify.
 
 ### Creating a Template
 
-Place template files in `templatesSrcDirPath`. Templates not defined will fall back to the default Keycloak theme.
+To create a custom template, place the template files in the directory specified by `templatesSrcDirPath`. Any templates you do not define will fall back to the default Keycloak theme.
 
-Example:
+Example Template:
 
 ```tsx
 // emails/templates/email-test.tsx
@@ -98,21 +98,29 @@ export const getSubject: GetSubject = async (props) => {
 };
 ```
 
-Use the `GetTemplate` and `GetSubject` types for parameter details and return types.
+For more details on the parameters and return types, refer to the `GetTemplate` and `GetSubject` type definitions.
+
+#### Producing Plain Text and HTML version of template
+
+Keycloak sends multipart emails containing both HTML and plain text versions to ensure compatibility with a wide range of email clients. Your theme must provide both versions for every template.
+
+To do so `keycloakify-emails` will call `getTemplate` function 2 times, with `{plainText: true}` and `{plainText: false}`. You need to return corresponding version accordingly.
+
+When using the `jsx-email` integration, the plain text version is automatically derived from the JSX component used for the HTML version. This eliminates the need to maintain two separate versions manually. However, ensure that the plain text version is tested and finalized before release.
 
 Check full example in the `./example` folder in this repo.
 
-### Creating an i18n.ts file
+### Overriding Messages in the Message Bundle
 
-There are some messages which are used by Keycloak methods and could be overridden only using `messages.properties` files.
+You can skip this step if you are satisfied with the default translations for `requiredAction` or `linkExpirationFormatter`.
 
-Create a `/emails/i18n.ts` file with following content:
+However, if you want to customize these messages or implement additional integrations based on a message bundle (`messages_x.properties`, you can define your own translations by creating an `/emails/i18n.ts` file with the following content:
 
 ```ts
 import { GetMessages } from "keycloakify-emails";
 
 export const getMessages: GetMessages = (props) => {
-  // all properties are optional, if you omit them, they will be taken from a base theme
+  // All properties are optional. If you omit them, they will fall back to the base theme defaults.
   if (props.locale === "en") {
     return {
       "requiredAction.CONFIGURE_TOTP": "Configure OTP",
@@ -126,15 +134,61 @@ export const getMessages: GetMessages = (props) => {
 };
 ```
 
-## Integrating with jsx-email
+Once you have defined your translations, include the file in the configuration:
 
-Install `jsx-email`:
-
-```bash
-npm i --save-dev jsx-email
+```js
+await buildEmailTheme({
+  // Other configurations
+  i18nSourceFile: import.meta.dirname + "/emails/i18n.ts",
+});
 ```
 
-Then create templates using `jsx-email` components:
+### Reference Implementation
+
+Below is a reference implementation showcasing all available messages that can be customized.
+
+<details>
+<summary>Click to expand</summary>
+
+```ts
+import { GetMessages } from "keycloakify-emails";
+
+export const getMessages: GetMessages = (props) => {
+  // Default properties are optional. If omitted, they will fall back to the base theme defaults.
+  return {
+    "requiredAction.CONFIGURE_TOTP": "Configure OTP",
+    "requiredAction.TERMS_AND_CONDITIONS": "Terms and Conditions",
+    "requiredAction.UPDATE_PASSWORD": "Update Password",
+    "requiredAction.UPDATE_PROFILE": "Update Profile",
+    "requiredAction.VERIFY_EMAIL": "Verify Email",
+    "requiredAction.CONFIGURE_RECOVERY_AUTHN_CODES": "Generate Recovery Codes",
+
+    // Units for link expiration timeout formatting
+    // For languages with plural forms based on the value (e.g., Czech), use the Java choice format.
+    // Documentation:
+    // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/MessageFormat.html
+    // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/text/ChoiceFormat.html
+    "linkExpirationFormatter.timePeriodUnit.seconds":
+      "{0,choice,0#seconds|1#second|1<seconds}",
+    "linkExpirationFormatter.timePeriodUnit.minutes":
+      "{0,choice,0#minutes|1#minute|1<minutes}",
+    "linkExpirationFormatter.timePeriodUnit.hours":
+      "{0,choice,0#hours|1#hour|1<hours}",
+    "linkExpirationFormatter.timePeriodUnit.days":
+      "{0,choice,0#days|1#day|1<days}",
+  };
+};
+```
+
+</details>
+
+The library will use this file to generate resource message bundle for specified locales.
+
+## Integrating with jsx-email
+
+Follow their [quick-start guide](https://jsx.email/docs/quick-start) to set up jsx-email in your project.
+
+Then you will be able to create templates using `jsx-email` components:
 
 ```tsx
 import {
@@ -144,7 +198,7 @@ import {
   createVariablesHelper,
 } from "keycloakify-emails";
 import { render } from "keycloakify-emails/jsx-email";
-import { Text } from "jsx-email";
+import { Text, Body, Container, Section, Preview, Html, Head } from "jsx-email";
 
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
@@ -220,8 +274,6 @@ export const getSubject: GetSubject = async (props) => {
   return "Verify email";
 };
 ```
-
-See [jsx-email docs](https://jsx.email/docs/quick-start) for more.
 
 ## Freemarker helpers
 
