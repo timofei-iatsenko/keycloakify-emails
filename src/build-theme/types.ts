@@ -43,9 +43,12 @@ export type BuildEmailThemeOptions = {
    * i18n.ts file is needed to override translations for strings which are not presented in emails bodies.
    *
    * Such as required actions, or linkExpirationFormatter messages
+   *
+   * @optional
+   * @example
    * "./emails/i18n.ts"
    */
-  i18nSourceFile: string;
+  i18nSourceFile?: string;
 
   /**
    * Array of your theme names from keycloakify.
@@ -64,6 +67,8 @@ export type BuildEmailThemeOptions = {
 
   /**
    * Options for underlying esbuild. Useful if you want to set additional esbuild plugins.
+   *
+   * @optional
    */
   esbuild?: BuildOptions;
 };

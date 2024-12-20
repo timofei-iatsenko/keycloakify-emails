@@ -48,4 +48,18 @@ describe("Smoke Test", () => {
 
     compareFolders(actualPath, expectedPath);
   });
+
+  test("Should work without i18n.ts", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare("no-i18n-ts");
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      locales: ["en", "pl"],
+      themeNames: ["vanilla"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
 });

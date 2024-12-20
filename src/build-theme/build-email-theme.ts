@@ -11,6 +11,7 @@ import { writePropertiesFile, getEmailTemplateFolder } from "./utils.js";
 import { renderMessages } from "./render-messages.js";
 import { renderTemplate } from "./render-template.js";
 import { pathToFileURL } from "node:url";
+import { I18n } from "../../example/src/login/i18n.js";
 
 const esbuildOutDir = "./.temp-emails";
 
@@ -82,14 +83,13 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
     path.resolve(opts.cwd, opts.templatesSrcDirPath),
   );
 
-  // todo: validate that i18nSourceFile file exists and throw error
-  // or make it optional?
-  const bundled = await bundle(
-    [...tpls, path.resolve(opts.cwd, opts.i18nSourceFile)],
-    opts.cwd,
-    esbuildOutDirPath,
-    opts,
-  );
+  const entryPoints = [...tpls];
+
+  if (opts.i18nSourceFile) {
+    entryPoints.push(path.resolve(opts.cwd, opts.i18nSourceFile));
+  }
+
+  const bundled = await bundle(entryPoints, opts.cwd, esbuildOutDirPath, opts);
 
   console.log(`Discovered templates:`);
   const promises = tpls.map(async (file) => {
@@ -115,14 +115,18 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
     return { ...module, file } as TemplateModule;
   });
 
-  const i18nFileModule = await (import(
-    bundled[path.resolve(opts.cwd, opts.i18nSourceFile)]
-  ) as Promise<I18nModule>);
+  let i18nFileModule: I18nModule | undefined;
 
-  if (!i18nFileModule.getMessages) {
-    throw new Error(
-      `File ${opts.i18nSourceFile} does not have an exported function getMessages`,
-    );
+  if (opts.i18nSourceFile) {
+    i18nFileModule = await (import(
+      bundled[path.resolve(opts.cwd, opts.i18nSourceFile)]
+    ) as Promise<I18nModule>);
+
+    if (!i18nFileModule.getMessages) {
+      throw new Error(
+        `File ${opts.i18nSourceFile} does not have an exported function getMessages`,
+      );
+    }
   }
 
   const modules = await Promise.all(promises);
@@ -144,7 +148,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
 async function renderThemeVariant(
   themeName: string,
   templates: TemplateModule[],
-  i18nModule: I18nModule,
+  i18nModule: I18nModule | undefined,
   opts: BuildEmailThemeOptions,
 ) {
   const emailThemeFolder = getEmailTemplateFolder(opts, themeName);
