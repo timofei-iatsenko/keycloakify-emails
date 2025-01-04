@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import { test, describe } from "vitest";
 import { compareFolders } from "./utils.js";
 import { buildEmailTheme } from "../src/index.js";
+import path from "node:path";
 
 async function prepare(caseFolderName: string) {
   const rootDir = nodepath.join(import.meta.dirname, caseFolderName);
@@ -24,9 +25,14 @@ describe("Smoke Test", () => {
 
     await buildEmailTheme({
       cwd: rootDir,
-      i18nSourceFile: rootDir + "/fixtures/emails/i18n.ts",
-      templatesSrcDirPath: rootDir + "/fixtures/emails/templates",
-      assetsDirPath: rootDir + "/fixtures/emails/assets",
+      i18nSourceFile: path.join(rootDir, "fixtures", "emails", "i18n.ts"),
+      templatesSrcDirPath: path.join(
+        rootDir,
+        "fixtures",
+        "emails",
+        "templates",
+      ),
+      assetsDirPath: path.join(rootDir, "fixtures", "emails", "assets"),
       locales: ["en", "pl"],
       themeNames: ["vanilla", "chocolate"],
       keycloakifyBuildDirPath: actualPath,
@@ -40,9 +46,9 @@ describe("Smoke Test", () => {
 
     await buildEmailTheme({
       cwd: rootDir,
-      i18nSourceFile: "./fixtures/emails/i18n.ts",
-      templatesSrcDirPath: "./fixtures/emails/templates",
-      assetsDirPath: "./fixtures/emails/assets",
+      i18nSourceFile: path.join(".", "fixtures", "emails", "i18n.ts"),
+      templatesSrcDirPath: path.join(".", "fixtures", "emails", "templates"),
+      assetsDirPath: path.join(".", "fixtures", "emails", "assets"),
       locales: ["en", "pl"],
       themeNames: ["vanilla", "chocolate"],
       keycloakifyBuildDirPath: actualPath,
@@ -56,7 +62,7 @@ describe("Smoke Test", () => {
 
     await buildEmailTheme({
       cwd: rootDir,
-      templatesSrcDirPath: "./fixtures/emails/templates",
+      templatesSrcDirPath: path.join(".", "fixtures", "emails", "templates"),
       locales: ["en", "pl"],
       themeNames: ["vanilla"],
       keycloakifyBuildDirPath: actualPath,

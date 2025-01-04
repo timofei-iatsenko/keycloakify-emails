@@ -47,6 +47,7 @@ import react from "@vitejs/plugin-react";
 import { keycloakify } from "keycloakify/vite-plugin";
 import themes from "./themes";
 import { buildEmailTheme } from "keycloakify-emails";
+import path from "node:path";
 
 export default defineConfig({
   plugins: [
@@ -56,7 +57,11 @@ export default defineConfig({
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
         await buildEmailTheme({
-          templatesSrcDirPath: import.meta.dirname + "/emails/templates",
+          templatesSrcDirPath: path.join(
+            import.meta.dirname,
+            "emails",
+            "templates",
+          ),
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ["en", "pl"],
