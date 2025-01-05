@@ -14,6 +14,9 @@ importers:
       jsx-email:
         specifier: ^2.5.3
         version: 2.5.3(@jsx-email/plugin-inline@1.0.1)(@jsx-email/plugin-minify@1.0.1)(@jsx-email/plugin-pretty@1.0.0)(@types/node@22.9.1)(@types/react-dom@18.3.5(@types/react@18.3.13))(@types/react@18.3.13)(react@18.3.1)(typescript@5.6.3)
+      keycloakify:
+        specifier: ^11.8.1
+        version: 11.8.1
       properties-parser:
         specifier: ^0.6.0
         version: 0.6.0
@@ -58,8 +61,8 @@ importers:
   example:
     dependencies:
       keycloakify:
-        specifier: ^11.3.24
-        version: 11.5.3
+        specifier: ^11.8.1
+        version: 11.8.1
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -3333,8 +3336,8 @@ packages:
       '@jsx-email/plugin-pretty': ^1.0.0
       react: ^18.2.0
 
-  keycloakify@11.5.3:
-    resolution: {integrity: sha512-VsDDhVAmPfsaiywn5PxREytkLhFYszK1eg3RDcYCJIsc+NM3NetuvEo3lY5azu4nRYiZSNsRz1akBUErGR1YEw==}
+  keycloakify@11.8.1:
+    resolution: {integrity: sha512-2YW9JXYhQbiMvRnev4VqDBBw1p/161TaBQ0BMZzEih9QlAVIgsccm/hY73YOsTpaizcCdBkPIbDu1fvLM/HXnA==}
     hasBin: true
 
   keyv@4.5.4:
@@ -8476,7 +8479,7 @@ snapshots:
       - ts-node
       - typescript
 
-  keycloakify@11.5.3:
+  keycloakify@11.8.1:
     dependencies:
       tsafe: 1.8.5
 
