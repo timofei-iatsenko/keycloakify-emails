@@ -31,8 +31,8 @@ The library includes a set of React components and utilities designed to simplif
 ## Installation
 
 ```bash
-npm install --save-dev keycloakify-emails
-# yarn add --dev keycloakify-emails
+npm install --save-dev keycloakify-emails jsx-email react
+# yarn add --dev keycloakify-emails jsx-email react
 ```
 
 ## Usage
