@@ -17,8 +17,8 @@ export type BuildEmailThemeOptions = {
    *
    * @example
    * ```js
-   * "./emails/templates"
-   * import.meta.dirname + '/emails/templates'
+   * path.join("emails", "templates")
+   * path.join(import.meta.dirname, "emails", "templates")
    * ```
    */
   templatesSrcDirPath: string;

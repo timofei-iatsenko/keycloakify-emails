@@ -59,7 +59,7 @@ export default defineConfig({
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
         await buildEmailTheme({
-          templatesSrcDirPath: pathJoin(
+          templatesSrcDirPath: path.join(
             import.meta.dirname,
             "src",
             "email",
