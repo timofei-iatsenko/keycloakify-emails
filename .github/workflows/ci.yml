@@ -1,9 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 env:
@@ -11,7 +8,7 @@ env:
 
 jobs:
   validate:
-    name: Lint Test and Build Lib
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -30,9 +27,6 @@ jobs:
 
       - name: Prettier
         run: pnpm format:check
-
-      - name: Test
-        run: pnpm test
 
   test:
     runs-on: ${{ matrix.os }}
@@ -61,7 +55,7 @@ jobs:
   test-example:
     #    runs-on: ${{ matrix.os }}
     runs-on: ubuntu-latest
-    name: Smoke test example
+    name: Build Lib & Smoke test example
     #    strategy:
     #      matrix:
     #        os: [ubuntu-latest, windows-latest]

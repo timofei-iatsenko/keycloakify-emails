@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -14,12 +15,25 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[no bump]')"
+    if: |
+      !(
+        contains(github.event.head_commit.message, '[no bump]') ||
+        startsWith(github.event.head_commit.message, 'chore: release') ||
+        startsWith(github.event.head_commit.message, 'ci:') ||
+        startsWith(github.event.head_commit.message, 'docs:')
+      )
     steps:
+      - name: "Generate token"
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.RELEASE_APP_ID }}
+          private_key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -40,4 +54,4 @@ jobs:
       - run: pnpm release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}

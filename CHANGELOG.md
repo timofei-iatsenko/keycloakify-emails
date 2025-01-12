@@ -1,3 +1,39 @@
+## [2.2.17](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.16...2.2.17) (2025-01-12)
+
+## [2.2.16](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.15...2.2.16) (2025-01-12)
+
+## [2.2.15](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.14...2.2.15) (2025-01-12)
+
+## [2.2.14](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.13...2.2.14) (2025-01-12)
+
+## [2.2.13](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.12...2.2.13) (2025-01-12)
+
+## [2.2.12](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.11...2.2.12) (2025-01-12)
+
+## [2.2.11](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.10...2.2.11) (2025-01-12)
+
+## [2.2.10](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.9...2.2.10) (2025-01-12)
+
+## [2.2.9](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.8...2.2.9) (2025-01-12)
+
+## [2.2.8](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.7...2.2.8) (2025-01-12)
+
+## [2.2.7](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.6...2.2.7) (2025-01-12)
+
+## [2.2.6](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.5...2.2.6) (2025-01-12)
+
+## [2.2.5](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.4...2.2.5) (2025-01-12)
+
+## [2.2.4](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.3...2.2.4) (2025-01-12)
+
+## [2.2.3](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.2...2.2.3) (2025-01-12)
+
+## [2.2.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.1...2.2.2) (2025-01-12)
+
+## [2.2.2](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.1...2.2.2) (2025-01-12)
+
+## [2.2.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.0...2.2.1) (2025-01-12)
+
 # [2.2.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.1.0...2.2.0) (2024-12-20)
 
 ### Features

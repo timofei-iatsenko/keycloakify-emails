@@ -206,8 +206,16 @@ import {
   GetTemplateProps,
   createVariablesHelper,
 } from "keycloakify-emails";
-import { render } from "keycloakify-emails/jsx-email";
-import { Text, Body, Container, Section, Preview, Html, Head } from "jsx-email";
+import {
+  Text,
+  Body,
+  Container,
+  Section,
+  Preview,
+  Html,
+  Head,
+  render,
+} from "jsx-email";
 
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
@@ -273,10 +281,7 @@ export const Template = ({ locale }: TemplateProps) => (
 );
 
 export const getTemplate: GetTemplate = async (props) => {
-  return await render(
-    <Template locale={props.locale} themeName={props.themeName} />,
-    props.plainText,
-  );
+  return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
 export const getSubject: GetSubject = async (props) => {
