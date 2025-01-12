@@ -15,7 +15,13 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[no bump]') || !contains(github.event.head_commit.message, 'chore: release')"
+    if: |
+      !(
+        contains(github.event.head_commit.message, '[no bump]') ||
+        startsWith(github.event.head_commit.message, 'chore: release') ||
+        startsWith(github.event.head_commit.message, 'ci:') ||
+        startsWith(github.event.head_commit.message, 'docs:')
+      )
     steps:
       - name: "Generate token"
         id: generate_token
