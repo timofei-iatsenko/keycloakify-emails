@@ -1,5 +1,5 @@
 import { Body, Container, Head, Html, Preview, Section } from "jsx-email";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 const main = {
   backgroundColor: "#f6f9fc",

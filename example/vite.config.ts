@@ -16,8 +16,8 @@ export default defineConfig({
         const config = await loadConfig;
 
         await buildEmailTheme({
-          templatesSrcDirPath: import.meta.dirname + "/emails/templates",
-          i18nSourceFile: import.meta.dirname + "/emails/i18n.ts",
+          templatesSrcDirPath: import.meta.dirname + "/src/email/templates",
+          i18nSourceFile: import.meta.dirname + "/src/email/i18n.ts",
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ["en", "pl"],
