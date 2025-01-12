@@ -11,7 +11,7 @@ env:
 
 jobs:
   validate:
-    name: Lint Test and Build Lib
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -30,9 +30,6 @@ jobs:
 
       - name: Prettier
         run: pnpm format:check
-
-      - name: Test
-        run: pnpm test
 
   test:
     runs-on: ${{ matrix.os }}
