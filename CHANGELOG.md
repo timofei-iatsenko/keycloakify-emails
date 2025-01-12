@@ -1,3 +1,5 @@
+## [2.2.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.0...2.2.1) (2025-01-12)
+
 # [2.2.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.1.0...2.2.0) (2024-12-20)
 
 ### Features
