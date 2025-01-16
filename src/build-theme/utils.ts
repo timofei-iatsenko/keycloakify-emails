@@ -4,6 +4,10 @@ import * as propertiesParser from "properties-parser";
 import type { BuildEmailThemeOptions } from "./types.js";
 
 export function toCamelCase(str: string) {
+  if (/^[a-z]+([A-Z][a-z]*)*$/.test(str)) {
+    return str;
+  }
+
   return str
     .toLowerCase()
     .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
