@@ -1,3 +1,9 @@
+## [2.2.18](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.17...2.2.18) (2025-01-17)
+
+### Bug Fixes
+
+- handle already camel cased filenames for messages ([0d3d7cd](https://github.com/timofei-iatsenko/keycloakify-emails/commit/0d3d7cda0e5a5cc5af9f11f81694eab5cd82b71b))
+
 ## [2.2.17](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.16...2.2.17) (2025-01-12)
 
 ## [2.2.16](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.15...2.2.16) (2025-01-12)
