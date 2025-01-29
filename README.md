@@ -191,12 +191,8 @@ Follow their [quick-start guide](https://jsx.email/docs/quick-start) to set up j
 Then you will be able to create templates using `jsx-email` components:
 
 ```tsx
-import {
-  GetSubject,
-  GetTemplate,
-  GetTemplateProps,
-  createVariablesHelper,
-} from "keycloakify-emails";
+import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 import {
   Text,
   Body,
@@ -314,7 +310,7 @@ This approach ensures compatibility with both Keycloak and the JSX-Email preview
 This function provides a type-safe way to write expressions for templates.
 
 ```tsx
-import { createVariablesHelper } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 const { exp } = createVariablesHelper("email-verification.ftl");
 
 <Text style={paragraph}>
@@ -351,23 +347,23 @@ For simpler cases, you can use `If` without the `Then` case:
 
 ## Keycloak email templates reference
 
-| Template name                                | Description                     |
-| -------------------------------------------- | ------------------------------- |
-| email-test.ftl                               | Test email template             |
-| email-update-confirmation.ftl                | Email update confirmation       |
-| email-verification.ftl                       | Email verification              |
-| event-login_error.ftl                        | Login error event notification  |
-| event-remove_credential.ftl                  | Credential removal notification |
-| event-remove_totp.ftl                        | TOTP removal notification       |
-| event-update_credential.ftl                  | Credential update notification  |
-| event-update_password.ftl                    | Password update notification    |
-| event-update_totp.ftl                        | TOTP update notification        |
-| event-user_disabled_by_permanent_lockout.ftl | Permanent lockout notification  |
-| event-user_disabled_by_temporary_lockout.ftl | Temporary lockout notification  |
-| executeActions.ftl                           | Execute actions email           |
-| identity-provider-link.ftl                   | Identity provider link email    |
-| org-invite.ftl                               | Organization invitation         |
-| password-reset.ftl                           | Password reset email            |
+| Template name                                                                                                                                                                               | Description                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| [email-test.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/email-test.ftl)                                                             | Test email template             |
+| [email-update-confirmation.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/email-update-confirmation.ftl)                               | Email update confirmation       |
+| [email-verification.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/email-verification.ftl)                                             | Email verification              |
+| [event-login_error.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-login_error.ftl)                                               | Login error event notification  |
+| [event-remove_credential.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-remove_credential.ftl)                                   | Credential removal notification |
+| [event-remove_totp.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-remove_totp.ftl)                                               | TOTP removal notification       |
+| [event-update_credential.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-update_credential.ftl)                                   | Credential update notification  |
+| [event-update_password.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-update_password.ftl)                                       | Password update notification    |
+| [event-update_totp.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-update_totp.ftl)                                               | TOTP update notification        |
+| [event-user_disabled_by_permanent_lockout.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-user_disabled_by_permanent_lockout.ftl) | Permanent lockout notification  |
+| [event-user_disabled_by_temporary_lockout.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/event-user_disabled_by_temporary_lockout.ftl) | Temporary lockout notification  |
+| [executeActions.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/executeActions.ftl)                                                     | Execute actions email           |
+| [identity-provider-link.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/identity-provider-link.ftl)                                     | Identity provider link email    |
+| [org-invite.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/org-invite.ftl)                                                             | Organization invitation         |
+| [password-reset.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/password-reset.ftl)                                                     | Password reset email            |
 
 ## License
 
