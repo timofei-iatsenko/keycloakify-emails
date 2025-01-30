@@ -1,12 +1,8 @@
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
 import * as Fm from "keycloakify-emails/jsx-email";
-import {
-  createVariablesHelper,
-  GetSubject,
-  GetTemplate,
-  GetTemplateProps,
-} from "keycloakify-emails";
+import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
+import { createVariablesHelper } from "keycloakify-emails/variables";
 
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 

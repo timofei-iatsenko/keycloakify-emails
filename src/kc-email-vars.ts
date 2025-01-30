@@ -15,31 +15,31 @@ type Path<T, K extends keyof T = keyof T> = K extends string // Ensure keys are 
 /**
  * org.keycloak.models.OrganizationModel
  */
-export type OrganizationModel = {
+export interface OrganizationModel {
   name: string;
   alias: string;
   enabled: boolean;
   description: string;
   redirectUrl: string;
   attributes: Record<string, string[]>;
-};
+}
 
-export type BrokeredIdentityContext = {
+export interface BrokeredIdentityContext {
   username: string;
-};
+}
 
-export type ProfileBean = {
+export interface ProfileBean {
   username: string;
   firstName: string;
   lastName: string;
   email: string;
   attributes: () => Record<string, string>;
-};
+}
 
 /**
  * org.keycloak.forms.login.freemarker.model.UrlBean;
  */
-export type UrlBean = {
+export interface UrlBean {
   loginAction: string;
   loginUrl: string;
   loginRestartFlowUrl: string;
@@ -56,15 +56,15 @@ export type UrlBean = {
   oauth2DeviceVerificationAction: string;
   resourcesPath: string;
   resourcesCommonPath: string;
-};
+}
 
-export type EventBean = {
+export interface EventBean {
   date: string;
   ipAddress: string;
   details: UnknownObject;
-};
+}
 
-export type BaseVars = {
+export interface BaseVars {
   locale: string;
   /**
    * org.keycloak.theme.Theme.getProperties()
@@ -73,7 +73,7 @@ export type BaseVars = {
   realmName: string;
   user: ProfileBean;
   url: UrlBean;
-};
+}
 
 export type LinkVars = {
   link: string;

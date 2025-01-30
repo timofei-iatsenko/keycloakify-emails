@@ -19,6 +19,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.mjs"
     },
+    "./variables": {
+      "types": "./dist/variables.d.ts",
+      "default": "./dist/variables.mjs"
+    },
     "./jsx-email": {
       "types": "./dist/jsx-email/index.d.ts",
       "default": "./dist/jsx-email/index.mjs"
