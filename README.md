@@ -321,6 +321,22 @@ const { exp } = createVariablesHelper("email-verification.ftl");
 
 The `exp("realmName")` argument is type-checked, ensuring that only valid template variables are available and accessible for the specified template.
 
+### Extending default type definition
+
+You can extend the default variable definitions using typescript [declaration merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
+
+```ts
+declare module "keycloakify-emails/variables" {
+  interface ProfileBean {
+    foo: string;
+  }
+}
+
+exp("user.foo");
+```
+
+You can find all available interfaces to extend in this repo in `src/kc-email-vars.ts` file.
+
 ### Condition
 
 Facilitates writing `if/elseif/else` expressions for Freemarker templates.
