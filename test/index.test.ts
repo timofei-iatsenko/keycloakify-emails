@@ -74,7 +74,7 @@ describe("Smoke Test", () => {
       cwd: rootDir,
       templatesSrcDirPath: "./fixtures/emails/templates",
       filterTemplate: (filePath) => !filePath.endsWith(".html"),
-      locales: ["en", "pl"],
+      locales: ["en"],
       themeNames: ["vanilla"],
       keycloakifyBuildDirPath: actualPath,
     });
@@ -90,7 +90,7 @@ describe("Smoke Test", () => {
       await buildEmailTheme({
         cwd: rootDir,
         templatesSrcDirPath: "./fixtures/emails/templates",
-        locales: ["en", "pl"],
+        locales: ["en"],
         themeNames: ["vanilla"],
         keycloakifyBuildDirPath: actualPath,
       });

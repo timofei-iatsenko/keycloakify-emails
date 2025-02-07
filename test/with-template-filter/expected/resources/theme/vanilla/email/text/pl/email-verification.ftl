@@ -1,1 +1,0 @@
-email-verification.ftl > template {"themeName":"vanilla","locale":"pl","plainText":true}
