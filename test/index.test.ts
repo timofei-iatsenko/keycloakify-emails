@@ -83,21 +83,15 @@ describe("Smoke Test", () => {
   });
 
   test("Should break compilation for email-test.html", async () => {
-    const { rootDir, actualPath, expectedPath } = await prepare(
-      "with-template-filter",
-    );
-    try {
-      await buildEmailTheme({
+    const { rootDir, actualPath } = await prepare("with-template-filter");
+    await expect(() =>
+      buildEmailTheme({
         cwd: rootDir,
         templatesSrcDirPath: "./fixtures/emails/templates",
         locales: ["en"],
         themeNames: ["vanilla"],
         keycloakifyBuildDirPath: actualPath,
-      });
-
-      compareFolders(actualPath, expectedPath);
-    } catch (error) {
-      expect(error).toBeTruthy();
-    }
+      }),
+    ).rejects.toThrowError();
   });
 });
