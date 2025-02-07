@@ -65,7 +65,7 @@ describe("Smoke Test", () => {
     compareFolders(actualPath, expectedPath);
   });
 
-  test("Should ignore email-test.hmtl", async () => {
+  test("Should ignore email-test.html", async () => {
     const { rootDir, actualPath, expectedPath } = await prepare(
       "with-template-filter",
     );
@@ -82,7 +82,7 @@ describe("Smoke Test", () => {
     compareFolders(actualPath, expectedPath);
   });
 
-  test("Should break compilation for email-test.hmtl", async () => {
+  test("Should break compilation for email-test.html", async () => {
     const { rootDir, actualPath, expectedPath } = await prepare(
       "with-template-filter",
     );
