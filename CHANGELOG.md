@@ -1,3 +1,9 @@
+# [3.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.0.0...3.1.0) (2025-02-07)
+
+### Features
+
+- add an option to exclude files from esbuild compilation ([#25](https://github.com/timofei-iatsenko/keycloakify-emails/issues/25)) ([faf4166](https://github.com/timofei-iatsenko/keycloakify-emails/commit/faf4166587eeba3b5ca9a85efeb413bfde381eb3))
+
 # [3.0.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.18...3.0.0) (2025-01-30)
 
 ### Features
