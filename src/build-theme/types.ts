@@ -23,6 +23,17 @@ export type BuildEmailThemeOptions = {
    */
   templatesSrcDirPath: string;
   /**
+   * Exclude some files from esbuild compilation.
+   *
+   * @example
+   * ```js
+   * (filePath) => !filePath.endsWith('.html');
+   * ```
+   *
+   * @optional
+   */
+  filterTemplate?: (filePath: string) => boolean;
+  /**
    * Path were your assets are stored.
    *
    * Path might be absolute or relative, in case of relative
