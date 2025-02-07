@@ -1,6 +1,6 @@
 import nodepath from "path";
 import fs from "fs/promises";
-import { test, describe } from "vitest";
+import { test, describe, expect } from "vitest";
 import { compareFolders } from "./utils.js";
 import { buildEmailTheme } from "../src/index.js";
 
@@ -63,5 +63,41 @@ describe("Smoke Test", () => {
     });
 
     compareFolders(actualPath, expectedPath);
+  });
+
+  test("Should ignore email-test.hmtl", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare(
+      "with-template-filter",
+    );
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      filterTemplate: (filePath) => !filePath.endsWith(".html"),
+      locales: ["en", "pl"],
+      themeNames: ["vanilla"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
+
+  test("Should break compilation for email-test.hmtl", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare(
+      "with-template-filter",
+    );
+    try {
+      await buildEmailTheme({
+        cwd: rootDir,
+        templatesSrcDirPath: "./fixtures/emails/templates",
+        locales: ["en", "pl"],
+        themeNames: ["vanilla"],
+        keycloakifyBuildDirPath: actualPath,
+      });
+
+      compareFolders(actualPath, expectedPath);
+    } catch (error) {
+      expect(error).toBeTruthy();
+    }
   });
 });
