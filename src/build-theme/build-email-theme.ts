@@ -15,7 +15,10 @@ import { pathToFileURL } from "node:url";
 const esbuildOutDir = "./.temp-emails";
 const kcEmailResourcesDir = "/resources";
 
-async function getTemplates(dirPath: string) {
+async function getTemplates(
+  dirPath: string,
+  filterTemplate?: (filePath: string) => boolean,
+) {
   try {
     // Read all items in the directory
     const items = await fs.readdir(dirPath, { withFileTypes: true });
@@ -23,7 +26,11 @@ async function getTemplates(dirPath: string) {
     // Filter out only files
     return items
       .filter((item) => item.isFile())
-      .map((file) => path.join(dirPath, file.name));
+      .map((file) => path.join(dirPath, file.name))
+      .filter((filePath) => {
+        if (!filterTemplate) return true;
+        return filterTemplate(filePath);
+      });
   } catch (err) {
     console.error(`Error scanning directory: ${(err as Error).message}`);
     throw err;
@@ -81,6 +88,7 @@ export async function buildEmailTheme(opts: BuildEmailThemeOptions) {
 
   const tpls = await getTemplates(
     path.resolve(opts.cwd, opts.templatesSrcDirPath),
+    opts.filterTemplate,
   );
 
   const entryPoints = [...tpls];
