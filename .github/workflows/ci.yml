@@ -19,8 +19,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable Corepack
-        run: corepack enable
+      - uses: pnpm/action-setup@v4
 
       - name: Install Dependencies
         run: pnpm i
@@ -43,8 +42,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable Corepack
-        run: corepack enable
+      - uses: pnpm/action-setup@v4
 
       - name: Install Dependencies
         run: pnpm i
@@ -69,8 +67,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Enable Corepack
-        run: corepack enable
+      - uses: pnpm/action-setup@v4
 
       - name: Install Dependencies
         run: pnpm i
