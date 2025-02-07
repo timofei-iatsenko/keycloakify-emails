@@ -1,6 +1,6 @@
 {
   "name": "keycloakify-emails",
-  "version": "2.2.18",
+  "version": "3.0.0",
   "description": "",
   "keywords": [
     "keycloakify",
@@ -18,6 +18,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.mjs"
+    },
+    "./variables": {
+      "types": "./dist/variables.d.ts",
+      "default": "./dist/variables.mjs"
     },
     "./jsx-email": {
       "types": "./dist/jsx-email/index.d.ts",

@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { toCamelCase } from "../../src/build-theme/utils.js";
+import { toCamelCase } from "./utils.js";
 
 describe("Utils tests", () => {
   describe("toCamelCase", () => {

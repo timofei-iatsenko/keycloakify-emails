@@ -1,3 +1,13 @@
+# [3.0.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.18...3.0.0) (2025-01-30)
+
+### Features
+
+- separate endpoint for createVariablesHelper ([#21](https://github.com/timofei-iatsenko/keycloakify-emails/issues/21)) ([04669e7](https://github.com/timofei-iatsenko/keycloakify-emails/commit/04669e7a49354408d840046d7b909f2365159232))
+
+### BREAKING CHANGES
+
+- `createVariablesHelper` and all Model types are now exported from `keycloakify-emails/variables`, please update your imports.
+
 ## [2.2.18](https://github.com/timofei-iatsenko/keycloakify-emails/compare/2.2.17...2.2.18) (2025-01-17)
 
 ### Bug Fixes
