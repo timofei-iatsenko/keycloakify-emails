@@ -94,4 +94,19 @@ describe("Smoke Test", () => {
       }),
     ).rejects.toThrowError();
   });
+
+  test("Should work with subfolders", async () => {
+    const { rootDir, actualPath, expectedPath } =
+      await prepare("with-subfolders");
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      locales: ["en"],
+      themeNames: ["vanilla"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
 });
