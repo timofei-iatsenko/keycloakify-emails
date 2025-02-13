@@ -1,4 +1,4 @@
-import { promises as fs } from "node:fs";
+import { type Dirent, promises as fs } from "node:fs";
 import path from "node:path";
 import * as esbuild from "esbuild";
 import { GetSubject, GetTemplate } from "../types.js";
@@ -20,13 +20,25 @@ async function getTemplates(
   filterTemplate?: (filePath: string) => boolean,
 ) {
   try {
+    const recursiveGetFiles = async (filePath: string): Promise<Dirent[]> => {
+      const items = await fs.readdir(filePath, { withFileTypes: true });
+      const dirents: Dirent[] = [];
+      for (const item of items) {
+        // Filter out only files
+        if (item.isFile()) dirents.push(item);
+        else if (item.isDirectory()) {
+          dirents.push(
+            ...(await recursiveGetFiles(path.join(item.parentPath, item.name))),
+          );
+        }
+      }
+      return dirents;
+    };
     // Read all items in the directory
-    const items = await fs.readdir(dirPath, { withFileTypes: true });
+    const items = await recursiveGetFiles(dirPath);
 
-    // Filter out only files
     return items
-      .filter((item) => item.isFile())
-      .map((file) => path.join(dirPath, file.name))
+      .map((file) => path.join(file.parentPath, file.name))
       .filter((filePath) => {
         if (!filterTemplate) return true;
         return filterTemplate(filePath);
