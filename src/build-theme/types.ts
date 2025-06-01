@@ -17,8 +17,8 @@ export type BuildEmailThemeOptions = {
    *
    * @example
    * ```js
-   * "./emails/templates"
-   * import.meta.dirname + '/emails/templates'
+   * path.join(buildContext.themeSrcDirPath, "email", "templates")
+   * src/email/templates
    * ```
    */
   templatesSrcDirPath: string;
@@ -65,7 +65,10 @@ export type BuildEmailThemeOptions = {
    *
    * @optional
    * @example
-   * "./emails/i18n.ts"
+   * ```
+   * path.join(buildContext.themeSrcDirPath, "email", "i18n.ts")
+   * src/email/i18n.ts
+   * ```
    */
   i18nSourceFile?: string;
 

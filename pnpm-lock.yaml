@@ -58,8 +58,8 @@ importers:
   example:
     dependencies:
       keycloakify:
-        specifier: ^11.3.24
-        version: 11.5.3
+        specifier: ^11.8.37
+        version: 11.8.37
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -3333,8 +3333,8 @@ packages:
       '@jsx-email/plugin-pretty': ^1.0.0
       react: ^18.2.0
 
-  keycloakify@11.5.3:
-    resolution: {integrity: sha512-VsDDhVAmPfsaiywn5PxREytkLhFYszK1eg3RDcYCJIsc+NM3NetuvEo3lY5azu4nRYiZSNsRz1akBUErGR1YEw==}
+  keycloakify@11.8.37:
+    resolution: {integrity: sha512-FzIXLGN9xTT4bv4iCelpqQZeI2+xmFwBm/IDW4bXyAIu0H7Wogwzvcz/copIOt9OhWTzb8/2C8ylFuAy+cEYTA==}
     hasBin: true
 
   keyv@4.5.4:
@@ -8476,7 +8476,7 @@ snapshots:
       - ts-node
       - typescript
 
-  keycloakify@11.5.3:
+  keycloakify@11.8.37:
     dependencies:
       tsafe: 1.8.5
 

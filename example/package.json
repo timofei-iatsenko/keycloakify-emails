@@ -13,13 +13,13 @@
     "build-keycloak-theme": "pnpm build && keycloakify build",
     "storybook": "storybook dev -p 6006",
     "format": "prettier . --write",
-    "emails:check": "email check ./emails/templates",
-    "emails:preview": "email preview ./emails/templates"
+    "emails:check": "email check ./src/email/templates",
+    "emails:preview": "email preview ./src/email/templates"
   },
   "license": "MIT",
   "keywords": [],
   "dependencies": {
-    "keycloakify": "^11.3.24",
+    "keycloakify": "^11.8.37",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
