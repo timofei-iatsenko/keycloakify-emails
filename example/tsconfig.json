@@ -25,6 +25,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
-  "exclude": ["src/email"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable react-refresh/only-export-components */
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
@@ -34,7 +37,8 @@ export const Template = ({ locale }: TemplateProps) => (
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </p>
       <p>
-        If you don't want to proceed with this modification, just ignore this message.
+        If you don&apos;t want to proceed with this modification, just ignore this
+        message.
       </p>
     </Text>
   </EmailLayout>

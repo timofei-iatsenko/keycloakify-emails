@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
@@ -25,8 +28,8 @@ export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={`Here is a preview`} locale={locale}>
     <Text style={paragraph}>
       <p>
-        Someone just requested to change your {exp("realmName")} account's credentials. If
-        this was you, click on the link below to reset them.
+        Someone just requested to change your {exp("realmName")} account&apos;s
+        credentials. If this was you, click on the link below to reset them.
       </p>
       <p>
         <a href={exp("link")}>Link to reset credentials</a>
@@ -35,8 +38,8 @@ export const Template = ({ locale }: TemplateProps) => (
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </p>
       <p>
-        If you don't want to reset your credentials, just ignore this message and nothing
-        will be changed.
+        If you don&apos;t want to reset your credentials, just ignore this message and
+        nothing will be changed.
       </p>
     </Text>
   </EmailLayout>

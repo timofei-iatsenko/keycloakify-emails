@@ -81,16 +81,6 @@ export default defineConfig({
 });
 ```
 
-### Excluding `src/email` from TypeScript compilation
-
-Add this line to your `tsconfig.json`:
-
-```json
-{
-  "exclude": ["src/email"]
-}
-```
-
 ### Creating a Template
 
 To create a custom template, place the template files in the directory specified by `templatesSrcDirPath` (usually `src/email/templates`).  

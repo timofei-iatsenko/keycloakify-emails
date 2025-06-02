@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { GetMessages } from "keycloakify-emails";
 
 /**
  * we want to have this as function with a params, to give developers a
  * flexibility to initialize theirs own i18n solution here
  */
-export const getMessages: GetMessages = (props) => {
+export const getMessages: GetMessages = (_props) => {
   // this default properties are optional, if you omit them, they will be taken from a base theme
   return {
     "requiredAction.CONFIGURE_TOTP": "Configure OTP",
