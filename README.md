@@ -30,6 +30,8 @@ The library includes a set of React components and utilities designed to simplif
 
 ## Installation
 
+Requires keycloakify v11.8.1 or higher.
+
 ```bash
 npm install --save-dev keycloakify-emails
 # yarn add --dev keycloakify-emails
@@ -47,6 +49,7 @@ import react from "@vitejs/plugin-react";
 import { keycloakify } from "keycloakify/vite-plugin";
 import themes from "./themes";
 import { buildEmailTheme } from "keycloakify-emails";
+import path from "node:path";
 
 export default defineConfig({
   plugins: [
@@ -56,7 +59,16 @@ export default defineConfig({
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
         await buildEmailTheme({
-          templatesSrcDirPath: import.meta.dirname + "/emails/templates",
+          templatesSrcDirPath: path.join(
+            buildContext.themeSrcDirPath,
+            "email",
+            "templates",
+          ),
+          i18nSourceFile: path.join(
+            buildContext.themeSrcDirPath,
+            "email",
+            "i18n.ts",
+          ),
           themeNames: buildContext.themeNames,
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ["en", "pl"],
@@ -69,19 +81,10 @@ export default defineConfig({
 });
 ```
 
-### Enable email theme in Keycloakify
-
-Create empty `./src/emails` folder with command:
-
-```bash
-mkdir -p ./src/emails && touch ./src/emails/.gitkeep
-```
-
-This will turn on default email theme support in the Keycloakify.
-
 ### Creating a Template
 
-To create a custom template, place the template files in the directory specified by `templatesSrcDirPath`. Any templates you do not define will fall back to the default Keycloak theme.
+To create a custom template, place the template files in the directory specified by `templatesSrcDirPath` (usually `src/email/templates`).  
+Any templates you do not define will fall back to the default Keycloak theme.
 
 Example Template:
 

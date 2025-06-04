@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable react-refresh/only-export-components */
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
+import * as Fm from "keycloakify-emails/jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
 
@@ -17,34 +21,38 @@ export const previewProps: TemplateProps = {
   themeName: "vanilla",
 };
 
-export const templateName = "Password Reset";
+export const templateName = "Org Invite";
 
-const { exp } = createVariablesHelper("password-reset.ftl");
+const { exp, v } = createVariablesHelper("org-invite.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={`Here is a preview`} locale={locale}>
     <Text style={paragraph}>
+      <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
+        <p>
+          Hi, {exp("firstName")} {exp("lastName")}.
+        </p>
+      </Fm.If>
+
       <p>
-        Someone just requested to change your {exp("realmName")} account's credentials. If
-        this was you, click on the link below to reset them.
+        You were invited to join the {exp("organization.name")} organization. Click the
+        link below to join.{" "}
       </p>
       <p>
-        <a href={exp("link")}>Link to reset credentials</a>
+        <a href={exp("link")}>Link to join the organization</a>
       </p>
       <p>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </p>
-      <p>
-        If you don't want to reset your credentials, just ignore this message and nothing
-        will be changed.
-      </p>
+      <p>If you don&apos;t want to join the organization, just ignore this message.</p>
     </Text>
   </EmailLayout>
 );
+
 export const getTemplate: GetTemplate = async (props) => {
   return await render(<Template {...props} />, { plainText: props.plainText });
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "Reset password";
+  return "Invitation to join the {0} organization";
 };

@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
+
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
 const paragraph = {
@@ -16,26 +20,24 @@ export const previewProps: TemplateProps = {
   themeName: "vanilla",
 };
 
-export const templateName = "Email Update Confirmation";
+export const templateName = "Email Verification";
 
-const { exp } = createVariablesHelper("email-update-confirmation.ftl");
+const { exp } = createVariablesHelper("email-verification.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={`Here is a preview`} locale={locale}>
     <Text style={paragraph}>
       <p>
-        To update your {exp("realmName")} account with email address {exp("newEmail")},
-        click the link below
+        Someone has created a {exp("user.firstName")} account with this email address. If
+        this was you, click the link below to verify your email address
       </p>
       <p>
-        <a href={exp("link")}>{exp("link")}</a>
+        <a href={exp("link")}>Link to e-mail address verification</a>
       </p>
       <p>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </p>
-      <p>
-        If you don't want to proceed with this modification, just ignore this message.
-      </p>
+      <p>If you didn&apos;t create this account, just ignore this message.</p>
     </Text>
   </EmailLayout>
 );
@@ -45,5 +47,5 @@ export const getTemplate: GetTemplate = async (props) => {
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "Verify new email";
+  return "Verify email";
 };

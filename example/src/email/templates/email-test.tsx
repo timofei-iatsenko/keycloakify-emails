@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { render, Text, Img, Container } from "jsx-email";
 import { EmailLayout } from "../layout";
 import { createVariablesHelper } from "keycloakify-emails/variables";

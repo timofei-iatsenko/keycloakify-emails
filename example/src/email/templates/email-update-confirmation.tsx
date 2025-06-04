@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable react-refresh/only-export-components */
 import { Text, render } from "jsx-email";
 import { EmailLayout } from "../layout";
-import * as Fm from "keycloakify-emails/jsx-email";
 import { GetSubject, GetTemplate, GetTemplateProps } from "keycloakify-emails";
 import { createVariablesHelper } from "keycloakify-emails/variables";
-
 interface TemplateProps extends Omit<GetTemplateProps, "plainText"> {}
 
 const paragraph = {
@@ -18,30 +19,27 @@ export const previewProps: TemplateProps = {
   themeName: "vanilla",
 };
 
-export const templateName = "Org Invite";
+export const templateName = "Email Update Confirmation";
 
-const { exp, v } = createVariablesHelper("org-invite.ftl");
+const { exp } = createVariablesHelper("email-update-confirmation.ftl");
 
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={`Here is a preview`} locale={locale}>
     <Text style={paragraph}>
-      <Fm.If condition={`${v("firstName")}?? && ${v("lastName")}??`}>
-        <p>
-          Hi, {exp("firstName")} {exp("lastName")}.
-        </p>
-      </Fm.If>
-
       <p>
-        You were invited to join the {exp("organization.name")} organization. Click the
-        link below to join.{" "}
+        To update your {exp("realmName")} account with email address {exp("newEmail")},
+        click the link below
       </p>
       <p>
-        <a href={exp("link")}>Link to join the organization</a>
+        <a href={exp("link")}>{exp("link")}</a>
       </p>
       <p>
         This link will expire within {exp("linkExpirationFormatter(linkExpiration)")}.
       </p>
-      <p>If you don't want to join the organization, just ignore this message.</p>
+      <p>
+        If you don&apos;t want to proceed with this modification, just ignore this
+        message.
+      </p>
     </Text>
   </EmailLayout>
 );
@@ -51,5 +49,5 @@ export const getTemplate: GetTemplate = async (props) => {
 };
 
 export const getSubject: GetSubject = async (_props) => {
-  return "Invitation to join the {0} organization";
+  return "Verify new email";
 };
