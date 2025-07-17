@@ -82,6 +82,10 @@ export type LinkVars = {
   "linkExpirationFormatter(linkExpiration)": string;
 };
 
+export interface CodeVars {
+  code: string;
+}
+
 export type EmailTest = {
   emailId: "email-test.ftl";
   vars: Path<BaseVars>;
@@ -105,15 +109,11 @@ export type EmailVerification = {
 };
 
 // i didn't find this one in the keycloack code
-// export type EmailVerificationWithCode = {
-//   emailId: 'email-verification-with-code.ftl'
-//   vars:
-//     | 'code'
-//     | 'realmName'
-//     | 'linkExpiration'
-//     | 'linkExpirationFormatter(linkExpiration))'
-//   // ${kcSanitize(msg("emailVerificationBodyCodeHtml",code))?no_esc}
-// }
+export type EmailVerificationWithCode = {
+  emailId: "email-verification-with-code.ftl";
+  vars: Path<CodeVars>;
+  //   // ${kcSanitize(msg("emailVerificationBodyCodeHtml",code))?no_esc}
+};
 
 // event: EventBean
 export type EventLoginError = {
@@ -206,6 +206,7 @@ export type KcEmailVars =
   | EmailTest
   | EmailUpdateConfirmation
   | EmailVerification
+  | EmailVerificationWithCode
   | EventLoginError
   | EventRemoveCredential
   | EventRemoveTotp
