@@ -10,7 +10,12 @@ export type GetTemplate<T extends string = string> = (
 export type GetSubject<T extends string = string> = (props: {
   locale: string;
   themeName: T;
-}) => Promise<string>;
+}) => Promise<{
+  // The message variable name is used to reference the subject in the messages file.
+  messageVariableName?: string;
+  // The title is the actual subject line of the email.
+  title: string;
+}>;
 export type GetMessages<T extends string = string> = (props: {
   locale: string;
   themeName: T;
