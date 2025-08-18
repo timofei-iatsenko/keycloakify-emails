@@ -364,6 +364,30 @@ For simpler cases, you can use `If` without the `Then` case:
 </Fm.If>
 ```
 
+### Tag
+
+For writing arbitrary freemarker tags keeping similar JSX structure
+
+```tsx
+import * as Fm from "keycloakify-emails/jsx-email";
+
+<Fm.Tag name="list" attributes="requiredActions">
+  <Fm.Tag name="items" attributes={`as reqActionItem`}>
+    ...
+  </Fm.Tag>
+</Fm.Tag>;
+```
+
+Will produce:
+
+```ftl
+<#list requiredActions>
+  <#items as reqActionItem>
+    ...
+  </#items>
+</#list>
+```
+
 ## Keycloak email templates reference
 
 | Template name                                                                                                                                                                               | Description                     |
