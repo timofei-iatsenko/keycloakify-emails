@@ -1,19 +1,20 @@
-import typescriptEslint from "typescript-eslint";
+import typescript from "typescript-eslint";
 import reactRefresh from "eslint-plugin-react-refresh";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import eslintConfigPrettier from "eslint-config-prettier";
 import globals from "globals";
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import storybook from "eslint-plugin-storybook";
 
-export default typescriptEslint.config(
+export default defineConfig(
   js.configs.recommended,
-  ...typescriptEslint.configs.recommended,
+  typescript.configs.recommended,
   react.configs.flat.recommended,
   react.configs.flat["jsx-runtime"],
   eslintConfigPrettier,
-  ...storybook.configs["flat/recommended"],
+  storybook.configs["flat/recommended"],
   {
     ignores: ["dist/**", "**/locales/*.ts", "public/**"],
   },
@@ -47,7 +48,7 @@ export default typescriptEslint.config(
     },
   },
   {
-    files: ["emails/**"],
+    files: ["./src/email/**"],
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-empty-object-type": "off",
