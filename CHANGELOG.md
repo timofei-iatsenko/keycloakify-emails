@@ -1,3 +1,9 @@
+# [3.2.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.1.0...3.2.0) (2025-08-18)
+
+### Features
+
+- add tag component ([#39](https://github.com/timofei-iatsenko/keycloakify-emails/issues/39)) ([7639365](https://github.com/timofei-iatsenko/keycloakify-emails/commit/7639365d15f7538ae07b260eed5c4fcc7733b22d))
+
 # [3.1.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.0.0...3.1.0) (2025-02-07)
 
 ### Features
