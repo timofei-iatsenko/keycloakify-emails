@@ -30,8 +30,8 @@ const { exp } = createVariablesHelper("executeActions.ftl");
 export const Template = ({ locale }: TemplateProps) => (
   <EmailLayout preview={`Here is a preview`} locale={locale}>
     <Text style={paragraph}>
-      Your administrator has just requested that you update your {2} account by performing
-      the following action(s):
+      Your administrator has just requested that you update your {exp("realmName")}{" "}
+      account by performing the following action(s):
       <Fm.If condition="requiredActions??">
         <ul>
           <FmList value="requiredActions" itemAs="reqActionItem">
