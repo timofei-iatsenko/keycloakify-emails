@@ -56,6 +56,10 @@ export default defineConfig({
     react(),
     keycloakify({
       themeName: ["vanilla", "chocolate"],
+      // See: https://docs.keycloakify.dev/features/environment-variables
+      environmentVariables: [
+        { name: "MY_ENV", default: "Default Value of MY_ENV" },
+      ],
       accountThemeImplementation: "none",
       postBuild: async (buildContext) => {
         await buildEmailTheme({
@@ -73,6 +77,7 @@ export default defineConfig({
           keycloakifyBuildDirPath: buildContext.keycloakifyBuildDirPath,
           locales: ["en", "pl"],
           cwd: import.meta.dirname,
+          environmentVariables: buildContext.environmentVariables,
           esbuild: {}, // optional esbuild options
         });
       },

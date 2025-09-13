@@ -11,6 +11,7 @@ export default defineConfig({
     keycloakify({
       themeName: ["vanilla", "chocolate"],
       accountThemeImplementation: "none",
+      environmentVariables: [{ name: "MY_ENV", default: "Default Value of MY_ENV" }],
       postBuild: async (buildContext) => {
         const { config: loadConfig } = await import("./jsx-email.config.js");
 
@@ -28,6 +29,7 @@ export default defineConfig({
           locales: ["en", "pl"],
           esbuild: config.esbuild,
           cwd: import.meta.dirname,
+          environmentVariables: buildContext.environmentVariables,
         });
       },
     }),

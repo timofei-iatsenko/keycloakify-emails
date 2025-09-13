@@ -29,6 +29,9 @@ export const Template = ({ locale }: TemplateProps) => (
       <Img src={`${baseUrl}/kc-logo.png`} alt="KC Logo" width="83" height="75" />
     </Container>
     <Text style={paragraph}>This is a test message from {exp("realmName")}</Text>
+    <Text style={paragraph}>
+      This is the current value of MY_ENV: {exp("properties.MY_ENV")}
+    </Text>
   </EmailLayout>
 );
 

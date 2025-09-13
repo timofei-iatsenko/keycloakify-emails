@@ -93,4 +93,11 @@ export type BuildEmailThemeOptions = {
    * @optional
    */
   esbuild?: BuildOptions;
+
+  /**
+   * Forwarded buildContext.environmentVariables.
+   *
+   * @optional Only for backward compatibility reasons.
+   */
+  environmentVariables?: { name: string; default: string }[];
 };
