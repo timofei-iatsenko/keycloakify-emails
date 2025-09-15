@@ -93,4 +93,12 @@ export type BuildEmailThemeOptions = {
    * @optional
    */
   esbuild?: BuildOptions;
+
+  /**
+   * Forwarded buildContext.environmentVariables.
+   *
+   * @link https://docs.keycloakify.dev/features/environment-variables
+   * @optional
+   */
+  environmentVariables?: { name: string; default: string }[];
 };

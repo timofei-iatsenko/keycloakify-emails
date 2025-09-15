@@ -94,4 +94,23 @@ describe("Smoke Test", () => {
       }),
     ).rejects.toThrowError();
   });
+
+  test("Should process handle `environmentVariables`", async () => {
+    const { rootDir, actualPath, expectedPath } =
+      await prepare("with-env-vars");
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      filterTemplate: (filePath) => !filePath.endsWith(".html"),
+      locales: ["en"],
+      themeNames: ["vanilla"],
+      keycloakifyBuildDirPath: actualPath,
+      environmentVariables: [
+        { name: "MY_ENV", default: "Default Value of MY_ENV" },
+      ],
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
 });

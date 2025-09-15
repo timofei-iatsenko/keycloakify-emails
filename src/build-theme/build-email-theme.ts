@@ -172,6 +172,12 @@ async function renderThemeVariant(
   await writePropertiesFile(emailThemeFolder, "theme.properties", {
     parent: "base",
     locales: opts.locales.join(","),
+    ...Object.fromEntries(
+      (opts.environmentVariables ?? []).map((declaration) => [
+        declaration.name,
+        `\${env.${declaration.name}:${declaration.default}}`,
+      ]),
+    ),
   });
 
   if (opts.assetsDirPath) {
