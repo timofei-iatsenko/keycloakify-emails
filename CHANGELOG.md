@@ -1,3 +1,9 @@
+# [3.3.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.2.0...3.3.0) (2025-09-15)
+
+### Features
+
+- Implement environment variables support ([#49](https://github.com/timofei-iatsenko/keycloakify-emails/issues/49)) ([a5d49d7](https://github.com/timofei-iatsenko/keycloakify-emails/commit/a5d49d70096b48836cab437b3681e0b3ccd4dd87))
+
 # [3.2.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.1.0...3.2.0) (2025-08-18)
 
 ### Features
