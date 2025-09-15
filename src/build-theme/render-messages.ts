@@ -30,11 +30,14 @@ export async function renderMessages(
     : {};
 
   for (const mod of templates) {
-    messages[toCamelCase(getBaseName(mod.file)) + "Subject"] =
-      await mod.getSubject({
-        locale,
-        themeName,
-      });
+    const subject = await mod.getSubject({
+      locale,
+      themeName,
+    });
+
+    const defaultMessage = toCamelCase(getBaseName(mod.file)) + "Subject";
+
+    messages[subject.messageVariableName || defaultMessage] = subject.title;
   }
 
   await writePropertiesFile(
