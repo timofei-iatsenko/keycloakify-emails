@@ -413,6 +413,8 @@ Will produce:
 | [org-invite.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/org-invite.ftl)                                                             | Organization invitation         |
 | [password-reset.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/password-reset.ftl)                                                     | Password reset email            |
 
+For custom email templates, add the template name into the `types/keycloakify-emails.d.ts`. This only will make sense if you have extended Keycloak to process custom emails. 
+
 ## License
 
 This package is licensed under [MIT][license].
