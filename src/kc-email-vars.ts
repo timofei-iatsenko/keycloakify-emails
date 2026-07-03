@@ -202,6 +202,35 @@ export type PasswordReset = {
   // ${kcSanitize(msg("passwordResetBodyHtml",link, linkExpiration, realmName, linkExpirationFormatter(linkExpiration)))?no_esc}
 };
 
+export type VerifiableCredentialOffer = {
+  emailId: "verifiable-credential-offer.ftl";
+  vars: Path<
+    BaseVars &
+      LinkVars & {
+        credentialScopeDisplayName: string;
+      }
+  >;
+  // ${kcSanitize(msg("verifiableCredentialOfferBodyHtml", link, linkExpiration, realmName, credentialScopeDisplayName, linkExpirationFormatter(linkExpiration)))?no_esc}
+};
+
+export type WorkflowNotification = {
+  emailId: "workflow-notification.ftl";
+  vars: Path<
+    BaseVars & {
+      subjectKey: string;
+      messageKey: string;
+      customMessage: string;
+      daysRemaining: number;
+      reason: string;
+      nextStepType: string;
+    }
+  >;
+  // ${kcSanitize(msg(subjectKey, daysRemaining, reason))?no_esc}
+  // ${kcSanitize(customMessage)?no_esc}
+  // ${user.firstName!user.username}
+  // ${kcSanitize(msg(messageKey, daysRemaining, reason))?no_esc}
+};
+
 export type KcEmailVars =
   | EmailTest
   | EmailUpdateConfirmation
@@ -217,4 +246,6 @@ export type KcEmailVars =
   | ExecuteActions
   | IdentityProviderLink
   | OrgInvite
-  | PasswordReset;
+  | PasswordReset
+  | VerifiableCredentialOffer
+  | WorkflowNotification;
