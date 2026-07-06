@@ -412,6 +412,8 @@ Will produce:
 | [identity-provider-link.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/identity-provider-link.ftl)                                     | Identity provider link email    |
 | [org-invite.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/org-invite.ftl)                                                             | Organization invitation         |
 | [password-reset.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/password-reset.ftl)                                                     | Password reset email            |
+| [verifiable-credential-offer.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/verifiable-credential-offer.ftl)                           | Verifiable credential offer     |
+| [workflow-notification.ftl](https://github.com/keycloak/keycloak/blob/main/themes/src/main/resources/theme/base/email/html/workflow-notification.ftl)                                       | Workflow notification           |
 
 ## License
 
