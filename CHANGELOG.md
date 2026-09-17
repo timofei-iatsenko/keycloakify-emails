@@ -1,5 +1,11 @@
 # Changelog
 
+# [3.6.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.5.0...3.6.0) (2026-09-17)
+
+### Features
+
+- support jsx-email@3 ([#59](https://github.com/timofei-iatsenko/keycloakify-emails/issues/59)) ([2d447d9](https://github.com/timofei-iatsenko/keycloakify-emails/commit/2d447d9f06bd92d31193240a788f8777b35ef603))
+
 # [3.5.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.4.0...3.5.0) (2026-09-17)
 
 ### Features
