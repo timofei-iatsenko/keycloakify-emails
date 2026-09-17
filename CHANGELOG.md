@@ -1,5 +1,11 @@
 # Changelog
 
+# [3.4.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.3.1...3.4.0) (2026-07-06)
+
+### Features
+
+- add verifiable-credential-offer and workflow-notification ([#58](https://github.com/timofei-iatsenko/keycloakify-emails/issues/58)) ([a1a401c](https://github.com/timofei-iatsenko/keycloakify-emails/commit/a1a401c096faae33965eb861a2826be9f05083fd))
+
 ## [3.3.1](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.3.0...3.3.1) (2025-11-12)
 
 # [3.3.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.2.0...3.3.0) (2025-09-15)
