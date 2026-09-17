@@ -1,5 +1,11 @@
 # Changelog
 
+# [3.5.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.4.0...3.5.0) (2026-09-17)
+
+### Features
+
+- Add TypeScript support for FreeMarker expressions ([#53](https://github.com/timofei-iatsenko/keycloakify-emails/issues/53)) ([b770d74](https://github.com/timofei-iatsenko/keycloakify-emails/commit/b770d7492de3e7580d10686c2725f2f3a36f4971))
+
 # [3.4.0](https://github.com/timofei-iatsenko/keycloakify-emails/compare/3.3.1...3.4.0) (2026-07-06)
 
 ### Features
