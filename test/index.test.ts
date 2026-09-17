@@ -113,4 +113,20 @@ describe("Smoke Test", () => {
 
     compareFolders(actualPath, expectedPath);
   });
+
+  test("Should correctly process jsx-emails components", async () => {
+    const { rootDir, actualPath, expectedPath } = await prepare(
+      "jsx-emails-components",
+    );
+
+    await buildEmailTheme({
+      cwd: rootDir,
+      templatesSrcDirPath: "./fixtures/emails/templates",
+      locales: ["en"],
+      themeNames: ["vanilla"],
+      keycloakifyBuildDirPath: actualPath,
+    });
+
+    compareFolders(actualPath, expectedPath);
+  });
 });
