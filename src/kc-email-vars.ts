@@ -10,6 +10,54 @@ type Path<T, K extends keyof T = keyof T> = K extends string // Ensure keys are 
         : `${K}` // For primitives or other types, just return the key
   : never;
 
+/**
+ * FreeMarker expression pattern helpers.
+ * These are generic types that validate paths against ValidPaths.
+ *
+ * @example
+ * ```ts
+ * // All of these are valid FreeMarker expressions:
+ * exp('organization.attributes.displayName[0]')
+ * exp('(organization.attributes.displayName[0])!organization.name')
+ * exp('user.firstName??')
+ * ```
+ */
+
+/** Array indexing pattern: path[0], path[1], etc. */
+export type FmArrayAccess<ValidPath extends string> = `${ValidPath}[${number}]`;
+
+/** Null-safe operator pattern: path?? */
+export type FmNullSafe<ValidPath extends string> = `${ValidPath}??`;
+
+/** Simple fallback pattern: path!fallback */
+export type FmFallback<
+  ValidPath extends string,
+  FallbackPath extends string = ValidPath,
+> = `${ValidPath}!${FallbackPath}`;
+
+/** Grouped fallback pattern: (expr)!fallback */
+export type FmGroupedFallback<
+  ValidPath extends string,
+  FallbackPath extends string = ValidPath,
+> = `(${ValidPath})!${FallbackPath}`;
+
+/**
+ * Combined type for FreeMarker expressions with validated paths.
+ * Use this with ValidPaths to get type-safe FreeMarker expressions.
+ */
+export type FreemarkerExpression<ValidPath extends string> =
+  // Array access
+  | FmArrayAccess<ValidPath>
+  // Null-safe operator
+  | FmNullSafe<ValidPath>
+  | FmNullSafe<FmArrayAccess<ValidPath>>
+  // Simple fallback
+  | FmFallback<ValidPath>
+  | FmFallback<FmArrayAccess<ValidPath>, ValidPath>
+  // Grouped fallback (path or array access inside parens)
+  | FmGroupedFallback<ValidPath>
+  | FmGroupedFallback<FmArrayAccess<ValidPath>, ValidPath>;
+
 // refer to https://github.dev/keycloak/keycloak/tree/main/services/src/main/java/org/keycloak/email/freemarker
 
 /**
